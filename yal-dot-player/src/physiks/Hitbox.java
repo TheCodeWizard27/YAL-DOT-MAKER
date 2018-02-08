@@ -60,6 +60,11 @@ public class Hitbox {
 		this.pos2.setPos(this.pos.getX()+x,this.pos.getY()+y);
 	}
 	
+	public void updateHitbox(Vector2f pos) {
+		this.pos.setPos(pos);
+		this.pos2.setPos(pos.getX()+this.size.getX(),pos.getY()+this.size.getY());
+	}
+	
 	public Vector2f getPos2() {
 		return pos2;
 	}
