@@ -13,7 +13,7 @@ public class DrawEngine extends JFrame{
 	 * @param game	gives canvas information of the game
 	 * 				to draw
 	 */
-	public DrawEngine(Game game){
+	private DrawEngine(Game game){
 		super("YAL DOT PLAYER");
 		this.setSize(800,600);
 		
@@ -27,7 +27,7 @@ public class DrawEngine extends JFrame{
 	 * @param game	gives the constructor the game 
 	 * @return 		returns always the same pointer to drawEngine
 	 */
-	public DrawEngine getDrawEngine(Game game) {
+	public static DrawEngine getDrawEngine(Game game) {
 		if(DrawEngine.drawEngine == null) {
 			DrawEngine.drawEngine = new DrawEngine(game);
 		}
