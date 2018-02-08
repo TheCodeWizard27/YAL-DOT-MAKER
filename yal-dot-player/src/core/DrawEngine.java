@@ -15,7 +15,7 @@ public class DrawEngine extends JFrame{
 	 */
 	private DrawEngine(Game game){
 		super("YAL DOT PLAYER");
-		this.setSize(800,600);
+		this.setSize(800,639);
 		
 		this.canvas = new Canvas(game);
 		this.add(this.canvas);
