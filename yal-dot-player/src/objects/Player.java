@@ -11,6 +11,7 @@ public class Player {
 	public static final int MAX_SPEED = 5;
 	
 	private static Player player;
+	private Vector2f rePos;
 	private Vector2f pos;
 	private Vector2f speed;
 	private Hitbox hitbox;
@@ -20,6 +21,7 @@ public class Player {
 	private boolean inAir = false;
 	
 	private Player() {
+		this.rePos = new Vector2f(0,0);
 		this.pos = new Vector2f(0,0);
 		this.speed = new Vector2f(0,0);
 		this.hitbox = new Hitbox(0,0,100,100);
@@ -46,6 +48,13 @@ public class Player {
 	}
 	public void setPos(float x, float y) {
 		this.pos.setPos(x,y);
+	}
+	
+	public void setXPos(float x) {
+		this.pos.setX(x);
+	}
+	public void setYPos(float y) {
+		this.pos.setY(y);
 	}
 	
 	public Vector2f getSpeed() {
@@ -77,6 +86,13 @@ public class Player {
 	}
 	public void setInAir(boolean inAir) {
 		this.inAir = inAir;
+	}
+
+	public Vector2f getRePos() {
+		return rePos;
+	}
+	public void setRePos(Vector2f rePos) {
+		this.rePos = rePos;
 	}
 	
 	
