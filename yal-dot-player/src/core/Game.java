@@ -8,8 +8,11 @@ public class Game {
 	private Set<Integer> keyBuffer = new HashSet<Integer>();
 	private DrawEngine drawengine;
 	private EventHandler eventHandler;
+	private Map map;
 	
 	public Game() {
+		this.setMap(new Map(null,null));
+		
 		this.drawengine = DrawEngine.getInstance(this);
 		this.eventHandler = EventHandler.getInstance(this);
 		this.drawengine.addKeyListener(this.eventHandler);
@@ -56,5 +59,12 @@ public class Game {
 	}
 	public void removeInput(int key) {
 		this.keyBuffer.remove(key);
+	}
+
+	public Map getMap() {
+		return map;
+	}
+	public void setMap(Map map) {
+		this.map = map;
 	}
 }
