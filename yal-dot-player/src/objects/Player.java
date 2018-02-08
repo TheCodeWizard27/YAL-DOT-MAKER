@@ -64,4 +64,10 @@ public class Player {
 	public Hitbox getHitbox() {
 		return this.hitbox;
 	}
+	public BufferedImage getSprite() {
+		return this.sprite;
+	}
+	public void setSprite(BufferedImage sprite) {
+		this.sprite = sprite;
+	}
 }
