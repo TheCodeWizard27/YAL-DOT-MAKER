@@ -8,15 +8,16 @@ import physiks.Hitbox;
 
 public class Player {
 	//Constants
-	public static final int IN_AIR = 1;
-	public static final int ON_GROUND = 0;
+	public static final int MAX_SPEED = 5;
 	
 	private static Player player;
 	private Vector2f pos;
 	private Vector2f speed;
 	private Hitbox hitbox;
-	private int state = Player.ON_GROUND;
 	private BufferedImage sprite;
+	
+	private boolean moving = false;
+	private boolean inAir = false;
 	
 	private Player() {
 		this.pos = new Vector2f(0,0);
@@ -53,13 +54,6 @@ public class Player {
 	public void setSpeed(Vector2f speed) {
 		this.speed = speed;
 	}
-
-	public int getState() {
-		return state;
-	}
-	public void setState(int state) {
-		this.state = state;
-	}
 	
 	public Hitbox getHitbox() {
 		return this.hitbox;
@@ -70,4 +64,20 @@ public class Player {
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
 	}
+
+	public boolean isMoving() {
+		return moving;
+	}
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
+	public boolean isInAir() {
+		return inAir;
+	}
+	public void setInAir(boolean inAir) {
+		this.inAir = inAir;
+	}
+	
+	
 }
