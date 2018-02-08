@@ -34,7 +34,7 @@ public class Map {
 		}
 		
 		this.assets[0] = new Asset(testImg, new Vector2f(0,500), new Vector2f(800,100));
-		this.hitboxes[0] = new Hitbox(0,700,800,100);
+		this.hitboxes[0] = new Hitbox(0,500,800,100);
 		
 		this.player.setPos(0, 400);
 	}
