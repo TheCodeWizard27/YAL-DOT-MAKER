@@ -9,7 +9,7 @@ public class Game {
 	private DrawEngine drawengine;
 	
 	public Game() {
-		this.drawengine = DrawEngine.getDrawEngine(this);
+		this.drawengine = DrawEngine.getInstance(this);
 		
 		//main loop
 		while(this.run) {
