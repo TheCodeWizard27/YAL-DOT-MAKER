@@ -9,7 +9,23 @@ public class Game {
 	private DrawEngine drawengine;
 	
 	public Game() {
-		this.drawengine = new DrawEngine(this);
+		this.drawengine = DrawEngine.getDrawEngine(this);
+		
+		//main loop
+		while(this.run) {
+			double startTime = System.nanoTime();
+			
+			//inner loop
+			this.update(System.nanoTime()-startTime);
+			this.handleInput(System.nanoTime()-startTime);
+		}
 	}
 	
+	public void update(double delta) {
+		System.out.printf("%f : Time Passed\n", (float)delta/100);
+	}
+	
+	public void handleInput(double delta) {
+		
+	}
 }
