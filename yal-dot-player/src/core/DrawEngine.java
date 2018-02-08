@@ -27,7 +27,7 @@ public class DrawEngine extends JFrame{
 	 * @param game	gives the constructor the game 
 	 * @return 		returns always the same pointer to drawEngine
 	 */
-	public static DrawEngine getDrawEngine(Game game) {
+	public static DrawEngine getInstance(Game game) {
 		if(DrawEngine.drawEngine == null) {
 			DrawEngine.drawEngine = new DrawEngine(game);
 		}
