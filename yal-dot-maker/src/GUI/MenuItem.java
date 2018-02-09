@@ -11,7 +11,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 	private Menu type;
 	
 	public MenuItem(Menu type) {
-		super(type.toString());
+		super(type.toString().toLowerCase());
 		this.addActionListener(this);
 		this.type = type;
 	}

@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +16,8 @@ public class Controller implements MouseMotionListener, MouseListener, KeyListen
 		this.view = View.getInstance(this.model);
 		this.view.setJMenuBar(this.model.getMenu().getMenuBar());
 		
+		this.view.add(this.model.getWest(),BorderLayout.WEST);
+		this.view.setVisible(true);
 	}
 	
 	@Override
