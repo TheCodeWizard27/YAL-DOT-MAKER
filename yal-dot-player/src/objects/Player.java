@@ -8,7 +8,10 @@ import physiks.Hitbox;
 
 public class Player {
 	//Constants
-	public static final int MAX_SPEED = 5;
+	public static final float MAX_SPEED = 100;
+	public static final float MAX_HEIGHT = 200;
+	public static final float WALK_SPEED = 5;
+	public static final float JUMP_HEIGHT = 5;
 	
 	private static Player player;
 	private Vector2f rePos;
@@ -19,13 +22,14 @@ public class Player {
 	
 	private boolean moving = false;
 	private boolean inAir = false;
+	private boolean jumping = false;
 	
 	private Player() {
 		this.rePos = new Vector2f(0,0);
 		this.pos = new Vector2f(0,0);
 		this.speed = new Vector2f(0,0);
 		this.hitbox = new Hitbox(0,0,100,100);
-		this.sprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_RGB);
+		this.sprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
 		
 		//test sprite for debbuging
 		for(int y = 0; y < 100; y++) {
@@ -60,10 +64,12 @@ public class Player {
 	public Vector2f getSpeed() {
 		return speed;
 	}
-	public void setSpeed(Vector2f speed) {
-		this.speed = speed;
+	public void setXSpeed(float speed) {
+		this.speed.setX(speed);
 	}
-	
+	public void setYSpeed(float speed) {
+		this.speed.setY(speed);
+	}
 	public Hitbox getHitbox() {
 		return this.hitbox;
 	}
@@ -93,6 +99,14 @@ public class Player {
 	}
 	public void setRePos(Vector2f rePos) {
 		this.rePos = rePos;
+	}
+
+	public boolean isJumping() {
+		return jumping;
+	}
+
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
 	}
 	
 	

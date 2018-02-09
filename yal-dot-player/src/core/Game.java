@@ -50,8 +50,6 @@ public class Game implements ActionListener{
 	public void update() {
 		Player player = this.map.getPlayer();
 		
-		//System.out.printf("%f : Milliseconds\n",delta);
-		
 		//hitbox detection
 		for(Hitbox hitbox : this.map.getHitboxes()) {
 			if(player.getHitbox().hitboxIntersection(hitbox)) {
@@ -76,7 +74,7 @@ public class Game implements ActionListener{
 				}
 			}
 		}
-		
+
 	}
 	
 	/**
@@ -90,15 +88,18 @@ public class Game implements ActionListener{
 		for(int key : this.keyBuffer) {
 			switch(key) {
 			case KeyEvent.VK_W: case KeyEvent.VK_UP:
-				player.setYPos(player.getPos().getX() - Player.JUMP_HEIGHT);
+				player.setYSpeed(player.getSpeed().getY() - Player.JUMP_HEIGHT);
+				player.setJumping(true);
 				break;
 			case KeyEvent.VK_A: case KeyEvent.VK_LEFT:
-				player.setXPos(player.getPos().getX() - Player.WALK_SPEED);
+				player.setYSpeed(player.getSpeed().getX() - Player.WALK_SPEED);
+				player.setMoving(true);
 				break;
 			case KeyEvent.VK_S: case KeyEvent.VK_DOWN:
 				break;
 			case KeyEvent.VK_D: case KeyEvent.VK_RIGHT:
-				player.setXPos(player.getPos().getX() + Player.WALK_SPEED);
+				player.setYSpeed(player.getSpeed().getX() + Player.WALK_SPEED);
+				player.setMoving(true);
 				break;
 			default:
 				System.out.println(key);

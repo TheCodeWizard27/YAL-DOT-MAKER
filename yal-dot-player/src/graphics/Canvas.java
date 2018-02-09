@@ -22,7 +22,7 @@ public class Canvas extends JPanel{
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
-		BufferedImage img = new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(800,600,BufferedImage.TYPE_INT_ARGB);
 		Map map = this.game.getMap();
 		Graphics2D imgG2d = (Graphics2D) img.createGraphics();
 		
@@ -35,6 +35,8 @@ public class Canvas extends JPanel{
 			for(Hitbox hitbox : map.getHitboxes()) {
 				imgG2d.setColor(Color.CYAN);
 				imgG2d.drawRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
+				imgG2d.setColor(new Color(0,255,255,125));
+				imgG2d.fillRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
 			}
 		}
 		

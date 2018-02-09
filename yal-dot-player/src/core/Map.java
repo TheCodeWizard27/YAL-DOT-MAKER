@@ -26,10 +26,10 @@ public class Map {
 		this.hitboxes = new Hitbox[1];
 		
 		//debug map
-		BufferedImage testImg = new BufferedImage(800,100,BufferedImage.TYPE_INT_RGB);
+		BufferedImage testImg = new BufferedImage(800,100,BufferedImage.TYPE_INT_ARGB);
 		for(int y = 0; y < 100; y++) {
 			for(int x = 0; x < 800; x++) {
-				testImg.setRGB(x, y, new Color(255,0,255).getRGB());
+				testImg.setRGB(x, y, new Color(255,255,0).getRGB());
 			}
 		}
 		
