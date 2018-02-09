@@ -11,7 +11,7 @@ import constants.Menu;
 public class MenuBar {
 	private JMenuBar menuBar;
 	private JMenu menuDrop;
-	private MenuItem[] menuItems = new MenuItem[2];
+	private MenuItem[] menuItems = new MenuItem[3];
 	
 	public MenuBar() {
 		this.menuBar = new JMenuBar();
