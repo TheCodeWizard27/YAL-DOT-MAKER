@@ -13,6 +13,8 @@ public class Controller implements MouseMotionListener, MouseListener, KeyListen
 	public Controller() {
 		this.model = new Model();
 		this.view = View.getInstance(this.model);
+		this.view.setJMenuBar(this.model.getMenu().getMenuBar());
+		
 	}
 	
 	@Override

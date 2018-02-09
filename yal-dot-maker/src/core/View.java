@@ -11,7 +11,7 @@ public class View extends JFrame{
 	
 	private View(Model model) {
 		super("YAL DOT MAKER");
-		this.setSize(800,600);
+		this.setSize(1200,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
