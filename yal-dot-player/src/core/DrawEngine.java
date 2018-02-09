@@ -19,6 +19,7 @@ public class DrawEngine extends JFrame{
 		
 		this.canvas = new Canvas(game);
 		this.add(this.canvas);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 	
