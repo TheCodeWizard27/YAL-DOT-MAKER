@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import core.Game;
 import core.Map;
 import objects.Asset;
+import physiks.Hitbox;
 
 public class Canvas extends JPanel{
 	private Game game;
@@ -29,6 +30,14 @@ public class Canvas extends JPanel{
 			imgG2d.drawImage(asset.getSprite(),(int)asset.getPos().getX(),(int)asset.getPos().getY(), null);
 		}
 		imgG2d.drawImage(map.getPlayer().getSprite(),(int)map.getPlayer().getPos().getX(),(int)map.getPlayer().getPos().getY(),null);
+		
+		if(this.game.isHitboxVisible()) {
+			for(Hitbox hitbox : map.getHitboxes()) {
+				imgG2d.setColor(Color.CYAN);
+				imgG2d.drawRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
+			}
+		}
+		
 		g2d.drawImage(img, 0, 0, null);
 		
 	}
