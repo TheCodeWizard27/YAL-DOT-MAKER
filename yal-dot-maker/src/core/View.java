@@ -1,6 +1,9 @@
 package core;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import GUI.InfoBar;
@@ -18,22 +21,29 @@ public class View extends JFrame{
 	private JSplitPane west;
 	private InfoBar infoBar;
 	private Canvas canvas;
+	private JPanel container;
 	
 	private View(Model model) {
 		super("YAL DOT MAKER");
 		this.tabs = new Tabs();
 		this.objectList = new ObjectList();
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
+		this.infoBar = new InfoBar();
 		this.canvas = new Canvas(model);
 		this.menu = new MenuBar(model);
 		this.model = model;
+		this.container = new JPanel();
 		
 		this.setSize(1200,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(this.menu.getMenuBar());
 		
-		this.west.setDividerLocation(540);
-		this.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.west,this.canvas));
+		this.container.setLayout(new BorderLayout());
+		this.container.add(this.infoBar.getInfoBar(), BorderLayout.SOUTH);
+		this.container.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.west,this.canvas), BorderLayout.CENTER);
+		
+		this.west.setDividerLocation(520);
+		this.add(this.container);
 		this.setVisible(true);
 	}
 	
