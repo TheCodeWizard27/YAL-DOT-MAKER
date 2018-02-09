@@ -11,8 +11,8 @@ public class Controller implements MouseMotionListener, MouseListener, KeyListen
 	private View view;
 	
 	public Controller() {
-		this.view = View.getInstance(this.model);
 		this.model = new Model();
+		this.view = View.getInstance(this.model);
 	}
 	
 	@Override
