@@ -25,7 +25,7 @@ public class View extends JFrame{
 		this.objectList = new ObjectList();
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.canvas = new Canvas(model);
-		this.menu = new MenuBar();
+		this.menu = new MenuBar(model);
 		this.model = model;
 		
 		this.setSize(1200,800);
