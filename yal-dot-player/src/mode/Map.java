@@ -23,8 +23,14 @@ public class Map {
 	
 	public Map() {
 		this.player = new Player(new Vector2f(0,0));
-		this.camera = new Camera(new Vector2f(0,0), new Vector2f(400,200));
+		this.camera = new Camera(new Vector2f(0,0), new Vector2f(400,250));
 		this.bounds = new Hitbox(0,0,600,600);
+		
+		try {
+			this.backgroundImg = ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt3.png"));
+		} catch (IOException e) {
+			System.out.println("Error");
+		}
 		
 		//debugging
 		try {

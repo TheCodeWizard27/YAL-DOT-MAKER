@@ -5,13 +5,14 @@ import mode.Mode;
 import mode.TitleScreen;
 
 public class Model {
+	private boolean run = true;
 	private Mode mode;
 	private Map map;
 	private TitleScreen titleScreen;
 	private boolean hitboxVisible;
 	
 	public Model() {
-		this.setMap(new Map());
+		this.map = new Map();
 	}
 
 	public Map getMap() {
@@ -44,5 +45,12 @@ public class Model {
 
 	public void setHitboxVisible(boolean hitboxVisible) {
 		this.hitboxVisible = hitboxVisible;
+	}
+	
+	public boolean shouldRun() {
+		return this.run;
+	}
+	public void setRun(boolean run) {
+		this.run = run;
 	}
 }

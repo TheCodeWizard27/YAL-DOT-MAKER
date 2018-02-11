@@ -14,14 +14,19 @@ import map.Camera;
 import map.Hitbox;
 import map.Player;
 import mode.Map;
+import mode.Mode;
+import mode.TitleScreen;
 
 public class Canvas extends JPanel{
 	private Model model;
 	private DrawEngine drawEngine;
+	private TitleScreen titleScreen;
 	
 	public Canvas(Model model, DrawEngine drawEngine) {
 		this.model = model;
+		this.titleScreen = new TitleScreen(model);
 		this.drawEngine = drawEngine;
+		this.add(titleScreen.getTitle());
 	}
 	
 	/**
@@ -29,6 +34,31 @@ public class Canvas extends JPanel{
 	 * @param g
 	 */
 	public void paintComponent(Graphics g) {
+		if(this.model.getMode() == Mode.TITLESCREEN) {
+			this.titleScreen.getTitle().setVisible(true);
+			
+		}else if(this.model.getMode() == Mode.IN_GAME){
+			this.titleScreen.getTitle().setVisible(false);
+			if(this.model.getMap() == null) {
+				this.showLoadingScreen(g);
+			}else {
+				this.drawEngine.requestFocus();
+				this.showGame(g);
+			}
+		}
+	}
+	
+	public void showLoadingScreen(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.setColor(Color.BLACK);
+		g2d.fillRect(0, 0, this.drawEngine.getWidth(), this.drawEngine.getHeight());
+
+		g2d.setColor(Color.WHITE);
+		g2d.drawString("Loading...", 0, 10);
+	}
+	
+	public void showGame(Graphics g) {
 		Graphics2D mainG2d = (Graphics2D) g;
 		Map map = this.model.getMap();
 		Player player = map.getPlayer();
@@ -42,6 +72,15 @@ public class Canvas extends JPanel{
 		
 		BufferedImage tempImg = new BufferedImage(cameraWidth,cameraHeight,BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
+		
+		//Background segment
+		BufferedImage backImg = new BufferedImage(map.getBackgroundImg().getWidth(),map.getBackgroundImg().getHeight(),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D backG2d = (Graphics2D) backImg.getGraphics();
+		
+		backG2d.scale((float)cameraWidth/(float)backImg.getWidth(), (float)cameraHeight/(float)backImg.getHeight());
+		backG2d.drawImage(map.getBackgroundImg(),0,0,null);
+		
+		g2d.drawImage(backImg, 0, 0, null);
 		
 		for (Asset asset : map.getAssets()) {
 			g2d.drawImage(asset.getSprite(), (int)asset.getPos().getX()-cX,(int)asset.getPos().getY()-cY,null);

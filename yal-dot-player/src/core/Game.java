@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Timer;
 
-import map.Hitbox;
 import map.Player;
 import mode.Map;
+import mode.Mode;
 
 public class Game implements ActionListener{
 	private static Game game;
@@ -34,9 +34,15 @@ public class Game implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.handleInput();
-		this.update();
-		this.drawEngine.repaint();
+		if(this.model.shouldRun()) {
+			if(this.model.getMode() == Mode.IN_GAME && this.model.getMap() != null) {
+				this.handleInput();
+				this.update();
+			}
+			this.drawEngine.repaint();
+		}else {
+			this.drawEngine.dispose();
+		}
 	}
 	
 	/**
