@@ -7,40 +7,60 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import core.Game;
-import core.Map;
-import objects.Asset;
-import physiks.Hitbox;
+import core.DrawEngine;
+import core.Model;
+import map.Asset;
+import map.Camera;
+import map.Hitbox;
+import map.Player;
+import mode.Map;
 
 public class Canvas extends JPanel{
-	private Game game;
+	private Model model;
+	private DrawEngine drawEngine;
 	
-	public Canvas(Game game) {
-		this.game = game;
+	public Canvas(Model model, DrawEngine drawEngine) {
+		this.model = model;
+		this.drawEngine = drawEngine;
 	}
 	
+	/**
+	 * Draws all visible things to screen
+	 * @param g
+	 */
 	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+		Graphics2D mainG2d = (Graphics2D) g;
+		Map map = this.model.getMap();
+		Player player = map.getPlayer();
+		Camera camera = map.getCamera();
 		
-		BufferedImage img = new BufferedImage(800,600,BufferedImage.TYPE_INT_ARGB);
-		Map map = this.game.getMap();
-		Graphics2D imgG2d = (Graphics2D) img.createGraphics();
+		int cameraWidth = (int)camera.getSize().getX();
+		int cameraHeight = (int)camera.getSize().getY();
 		
-		for(Asset asset : map.getAssets()) {
-			imgG2d.drawImage(asset.getSprite(),(int)asset.getPos().getX(),(int)asset.getPos().getY(), null);
+		int cX = (int)camera.getPos().getX();
+		int cY = (int)camera.getPos().getY();
+		
+		BufferedImage tempImg = new BufferedImage(cameraWidth,cameraHeight,BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
+		
+		for (Asset asset : map.getAssets()) {
+			g2d.drawImage(asset.getSprite(), (int)asset.getPos().getX()-cX,(int)asset.getPos().getY()-cY,null);
 		}
-		imgG2d.drawImage(map.getPlayer().getSprite(),(int)map.getPlayer().getPos().getX(),(int)map.getPlayer().getPos().getY(),null);
 		
-		if(this.game.isHitboxVisible()) {
+		g2d.drawImage(player.getSprite(), (int)player.getPos().getX()-cX, (int)player.getPos().getY()-cY,null);
+		
+		if(this.model.isHitboxVisible()) {
+			g2d.setColor(new Color(0,255,0,150));
+			g2d.drawRect((int)player.getHitbox().getPos().getX()-cX, (int)player.getHitbox().getPos().getY()-cY, 16, 32);
+			
+			g2d.setColor(new Color(255,0,255,150));
 			for(Hitbox hitbox : map.getHitboxes()) {
-				imgG2d.setColor(Color.CYAN);
-				imgG2d.drawRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
-				imgG2d.setColor(new Color(0,255,255,125));
-				imgG2d.fillRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
+				g2d.drawRect((int)hitbox.getPos().getX()-cX,(int)hitbox.getPos().getY()-cY,(int)hitbox.getSize().getX(),(int)hitbox.getSize().getY());
 			}
 		}
 		
-		g2d.drawImage(img, 0, 0, null);
+		mainG2d.scale((float)this.drawEngine.getWidth()/(float)cameraWidth, (float)this.drawEngine.getHeight()/(float)cameraHeight);
 		
+		mainG2d.drawImage(tempImg, 0, 0, null);
 	}
 }

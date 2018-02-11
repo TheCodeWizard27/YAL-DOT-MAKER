@@ -1,4 +1,4 @@
-package objects;
+package map;
 
 import java.awt.image.BufferedImage;
 
@@ -14,21 +14,29 @@ public class Asset {
 		this.pos = pos;
 		this.size = size;
 	}
+	
+	public Asset(BufferedImage sprite, float x, float y, float width, float height) {
+		this.sprite = sprite;
+		this.pos = new Vector2f(x,y);
+		this.size = new Vector2f(width,height);
+	}
 
+	/**
+	 * Getters 'n setters
+	 * @return
+	 */
 	public BufferedImage getSprite() {
 		return sprite;
 	}
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
 	}
-
 	public Vector2f getPos() {
 		return pos;
 	}
 	public void setPos(Vector2f pos) {
 		this.pos = pos;
 	}
-
 	public Vector2f getSize() {
 		return size;
 	}

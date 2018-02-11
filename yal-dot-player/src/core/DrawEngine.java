@@ -5,34 +5,22 @@ import javax.swing.JFrame;
 import graphics.Canvas;
 
 public class DrawEngine extends JFrame{
-	static private DrawEngine drawEngine;
+	private static DrawEngine drawEngine;
 	private Canvas canvas;
 	
-	/**
-	 * 
-	 * @param game	gives canvas information of the game
-	 * 				to draw
-	 */
-	private DrawEngine(Game game){
+	private DrawEngine(Model model) {
 		super("YAL DOT PLAYER");
-		this.setSize(800,639);
-		
-		this.canvas = new Canvas(game);
+		this.canvas = new Canvas(model,this);
+		this.setSize(800,600);
 		this.add(this.canvas);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+		
 	}
 	
-	/**
-	 * 
-	 * @param game	gives the constructor the game 
-	 * @return 		returns always the same pointer to drawEngine
-	 */
-	public static DrawEngine getInstance(Game game) {
-		if(DrawEngine.drawEngine == null) {
-			DrawEngine.drawEngine = new DrawEngine(game);
-		}
-		
+	public static DrawEngine getInstance(Model model) {
+		if(DrawEngine.drawEngine == null)
+			DrawEngine.drawEngine = new DrawEngine(model);
 		return DrawEngine.drawEngine;
 	}
 }

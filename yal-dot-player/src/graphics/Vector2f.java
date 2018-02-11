@@ -4,24 +4,42 @@ public class Vector2f {
 	private float x;
 	private float y;
 	
-	public Vector2f(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
-	
 	public Vector2f(Vector2f vector) {
 		this.x = vector.getX();
 		this.y = vector.getY();
 	}
-	
-	public void setPos(float x, float y) {
+
+	public Vector2f(float x , float y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public void setPos(Vector2f vector) {
+	public void setVector2f(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void setVector2f(Vector2f vector) {
 		this.x = vector.getX();
 		this.y = vector.getY();
+	}
+	
+	public void addToBoth(float x, float y) {
+		this.x += x;
+		this.y += y;
+	}
+	
+	public void addToBoth(Vector2f vector) {
+		this.x += vector.getX();
+		this.y += vector.getY();
+	}
+	
+	public void addToX(float x) {
+		this.x += x;
+	}
+	
+	public void addToY(float y) {
+		this.y += y;
 	}
 	
 	public float getX() {
@@ -30,6 +48,7 @@ public class Vector2f {
 	public void setX(float x) {
 		this.x = x;
 	}
+
 	public float getY() {
 		return y;
 	}
@@ -37,3 +56,4 @@ public class Vector2f {
 		this.y = y;
 	}
 }
+

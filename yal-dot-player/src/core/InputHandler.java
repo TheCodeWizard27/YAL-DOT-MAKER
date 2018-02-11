@@ -5,33 +5,30 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.HashSet;
+import java.util.Set;
 
-public class EventHandler implements MouseMotionListener, MouseListener, KeyListener{
-	private static EventHandler eventHandler;
-	private Game game;
-	
-	public static EventHandler getInstance(Game game) {
-		if(EventHandler.eventHandler == null) {
-			EventHandler.eventHandler = new EventHandler(game);
-		}
-		
-		return EventHandler.eventHandler;
-	}
-	
-	private EventHandler(Game game) {
-		this.game = game;
-	}
+public class InputHandler implements KeyListener, MouseListener, MouseMotionListener{
+	private Set<Integer> inputBuffer = new HashSet<Integer>();
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		game.addInput(e.getKeyCode());
+		this.inputBuffer.add(e.getKeyCode());
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		game.removeInput(e.getKeyCode());
+		this.inputBuffer.remove(e.getKeyCode());
 	}
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(KeyEvent e) {}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -60,14 +57,11 @@ public class EventHandler implements MouseMotionListener, MouseListener, KeyList
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	
+	public Set<Integer> getInputBuffer() {
+		return inputBuffer;
 	}
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void setInputBuffer(Set<Integer> inputBuffer) {
+		this.inputBuffer = inputBuffer;
 	}
 }
