@@ -115,31 +115,21 @@ public class Game implements ActionListener{
 		
 		for(Hitbox hitbox : map.getHitboxes()) {
 			if(player.getHitbox().hitboxIntersect(hitbox)) {
-				if(player.isJumping()) {
-					if(player.getSpeed().getX() > 0 && player.getPos().getX() < hitbox.getPos().getX()) {
-						player.getSpeed().setX(0);
-						player.getPos().addToX(hitbox.getPos().getX() - player.getHitbox().getPos2().getX());
-					}else if(player.getSpeed().getX() < 0 && player.getHitbox().getPos2().getX() > hitbox.getPos2().getX()) {
-						player.getSpeed().setX(0);
-						player.getPos().addToX(player.getPos().getX() - hitbox.getPos2().getX());
-					}else {
-						player.getSpeed().setY(0);
-						player.getPos().addToY((hitbox.getPos2().getY() - player.getPos().getY()));
-					}
+				
+				if(player.getSpeed().getX() > 0 && player.getPos().getX() < hitbox.getPos().getX()) {
+					player.getSpeed().setX(0);
+					player.getPos().addToX(hitbox.getPos().getX() - player.getHitbox().getPos2().getX());
+				}else if(player.getSpeed().getX() < 0 && player.getHitbox().getPos2().getX() > hitbox.getPos2().getX()) {
+					player.getSpeed().setX(0);
+					player.getPos().addToX(player.getPos().getX() - hitbox.getPos2().getX());
+				}else if(player.isJumping()){
+					player.getSpeed().setY(0);
+					player.getPos().addToY((hitbox.getPos2().getY() - player.getPos().getY()));
 					player.setInAir(true);
 				}else {
-					if(player.getSpeed().getX() > 0 && player.getPos().getX() < hitbox.getPos().getX()) {
-						player.getSpeed().setX(0);
-						player.getPos().addToX(hitbox.getPos().getX() - player.getHitbox().getPos2().getX());
-					}else if(player.getSpeed().getX() < 0 && player.getHitbox().getPos2().getX() > hitbox.getPos2().getX()) {
-						player.getSpeed().setX(0);
-						player.getPos().addToX(player.getPos().getX() - hitbox.getPos2().getX());
-					}else {
-						player.setInAir(false);
-						player.getSpeed().setY(0);
-						player.getPos().addToY(hitbox.getPos().getY() - player.getHitbox().getPos2().getY());
-					}
-					
+					player.setInAir(false);
+					player.getSpeed().setY(0);
+					player.getPos().addToY(hitbox.getPos().getY() - player.getHitbox().getPos2().getY());
 				}
 			}
 		}
