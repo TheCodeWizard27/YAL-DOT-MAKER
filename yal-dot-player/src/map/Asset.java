@@ -1,7 +1,7 @@
 package map;
 
 import java.awt.image.BufferedImage;
-
+import java.awt.Graphics2D;
 import graphics.Vector2f;
 
 public class Asset {
@@ -10,13 +10,21 @@ public class Asset {
 	private Vector2f size;
 	
 	public Asset(BufferedImage sprite, Vector2f pos, Vector2f size) {
-		this.sprite = sprite;
+		this.sprite = new BufferedImage((int)sprite.getWidth(),(int)sprite.getHeight(),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tempG2d = (Graphics2D) this.sprite.getGraphics();
+		tempG2d.scale((float)size.getX()/(float)sprite.getWidth(),(float)size.getY()/(float)sprite.getHeight());
+		
+		tempG2d.drawImage(sprite, 0, 0, null);
 		this.pos = pos;
 		this.size = size;
 	}
 	
 	public Asset(BufferedImage sprite, float x, float y, float width, float height) {
-		this.sprite = sprite;
+		this.sprite = new BufferedImage((int)sprite.getWidth(),(int)sprite.getHeight(),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tempG2d = (Graphics2D) this.sprite.getGraphics();
+		tempG2d.scale((float)width/(float)sprite.getWidth(),(float)height/(float)sprite.getHeight());
+		
+		tempG2d.drawImage(sprite, 0, 0, null);
 		this.pos = new Vector2f(x,y);
 		this.size = new Vector2f(width,height);
 	}

@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Timer;
 
+import map.Hitbox;
 import map.Player;
 import mode.Map;
 import mode.Mode;
@@ -54,16 +55,17 @@ public class Game implements ActionListener{
 		for(int key : this.inputHandler.getInputBuffer()) {
 			switch(key) {
 			case KeyEvent.VK_W: case KeyEvent.VK_SPACE: case KeyEvent.VK_UP:
-				player.getPos().addToY(-2.5f);
+				if(!player.isInAir())
+					player.setJumping(true);
 				break;
 			case KeyEvent.VK_A: case KeyEvent.VK_LEFT:
-				player.getPos().addToX(-2.5f);
+				player.setMovL(true);
 				break;
 			case KeyEvent.VK_D: case KeyEvent.VK_RIGHT:
-				player.getPos().addToX(2.5f);
+				player.setMovR(true);
 				break;
-			case KeyEvent.VK_S: case KeyEvent.VK_DOWN:
-				player.getPos().addToY(2.5f);
+			case KeyEvent.VK_Q:
+				player.getPos().setVector2f(50,0);;
 				break;
 			case KeyEvent.VK_T:
 				if(this.model.isHitboxVisible())
@@ -85,8 +87,63 @@ public class Game implements ActionListener{
 		Player player = map.getPlayer();
 		
 		//add movement code later
+		if(player.isMovL()) {
+			if(player.getSpeed().getX() > Player.MAX_WALK_SPEED*-1) {
+				player.getSpeed().addToX(Player.WALK_SPEED*-1);
+			}
+		}else if(player.isMovR()) {
+			if(player.getSpeed().getX() < Player.MAX_WALK_SPEED) {
+				player.getSpeed().addToX(Player.WALK_SPEED);
+			}
+		}else {
+			player.getSpeed().setX(0);
+		}
 		
-		player.update();
+		if(player.isJumping()) {
+			if(player.getSpeed().getY() > Player.MAX_JUMP_HEIGHT*-1) {
+				player.getSpeed().addToY(Player.JUMP_HEIGHT*-1);
+			}else {
+				player.setInAir(true);
+			}
+		}else {
+			player.getSpeed().addToY(0.5f);
+			player.setInAir(true);
+		}
+		
+		player.getPos().addToBoth(player.getSpeed());
+		player.getHitbox().setPos(player.getPos());
+		
+		for(Hitbox hitbox : map.getHitboxes()) {
+			if(player.getHitbox().hitboxIntersect(hitbox)) {
+				if(player.isJumping()) {
+					if(player.getSpeed().getX() > 0 && player.getPos().getX() < hitbox.getPos().getX()) {
+						player.getSpeed().setX(0);
+						player.getPos().addToX(hitbox.getPos().getX() - player.getHitbox().getPos2().getX());
+					}else if(player.getSpeed().getX() < 0 && player.getHitbox().getPos2().getX() > hitbox.getPos2().getX()) {
+						player.getSpeed().setX(0);
+						player.getPos().addToX(player.getPos().getX() - hitbox.getPos2().getX());
+					}else {
+						player.getSpeed().setY(0);
+						player.getPos().addToY((hitbox.getPos2().getY() - player.getPos().getY()));
+					}
+					player.setInAir(true);
+				}else {
+					if(player.getSpeed().getX() > 0 && player.getPos().getX() < hitbox.getPos().getX()) {
+						player.getSpeed().setX(0);
+						player.getPos().addToX(hitbox.getPos().getX() - player.getHitbox().getPos2().getX());
+					}else if(player.getSpeed().getX() < 0 && player.getHitbox().getPos2().getX() > hitbox.getPos2().getX()) {
+						player.getSpeed().setX(0);
+						player.getPos().addToX(player.getPos().getX() - hitbox.getPos2().getX());
+					}else {
+						player.setInAir(false);
+						player.getSpeed().setY(0);
+						player.getPos().addToY(hitbox.getPos().getY() - player.getHitbox().getPos2().getY());
+					}
+					
+				}
+			}
+		}
+		
 		map.getCamera().update(player,map.getBounds());
 		player.setMovL(false);
 		player.setMovR(false);

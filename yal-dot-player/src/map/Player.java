@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import graphics.Vector2f;
 
 public class Player {
-	public static final float JUMP_HEIGHT = 2;
+	public static final float JUMP_HEIGHT = 0.75f;
 	public static final float MAX_JUMP_HEIGHT = 6;
 	public static final float WALK_SPEED = 0.25f;
 	public static final float MAX_WALK_SPEED = 3;

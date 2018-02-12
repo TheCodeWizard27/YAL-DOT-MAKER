@@ -16,8 +16,8 @@ import map.Player;
 public class Map {
 	private Player player;
 	private Camera camera;
-	private Asset[] assets = new Asset[2];
-	private Hitbox[] hitboxes = new Hitbox[2];
+	private Asset[] assets = new Asset[4];
+	private Hitbox[] hitboxes = new Hitbox[4];
 	private Hitbox bounds;
 	private BufferedImage backgroundImg;
 	
@@ -34,7 +34,7 @@ public class Map {
 		
 		//debugging
 		try {
-			this.assets[0] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(0,100),new Vector2f(100,32));
+			this.assets[0] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(0,200),new Vector2f(100,32));
 		} catch (IOException e) {
 			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
@@ -42,11 +42,11 @@ public class Map {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
 				}
 			}
-			this.assets[0] = new Asset(errImg,new Vector2f(0,100),new Vector2f(100,32));
+			this.assets[0] = new Asset(errImg,new Vector2f(0,200),new Vector2f(100,32));
 		}
 		
 		try {
-			this.assets[1] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(200,100),new Vector2f(100,32));
+			this.assets[1] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(200,200),new Vector2f(100,32));
 		} catch (IOException e) {
 			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
@@ -54,11 +54,37 @@ public class Map {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
 				}
 			}
-			this.assets[1] = new Asset(errImg,new Vector2f(200,100),new Vector2f(100,32));
+			this.assets[1] = new Asset(errImg,new Vector2f(200,200),new Vector2f(100,32));
 		}
 		
-		this.hitboxes[0] = new Hitbox(0,106,100,25);
-		this.hitboxes[1] = new Hitbox(200,106,100,25);
+		try {
+			this.assets[2] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(250,140),new Vector2f(100,32));
+		} catch (IOException e) {
+			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			for(int y = 0; y < 32; y++) {
+				for(int x = 0; x < 100; x++) {
+					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
+				}
+			}
+			this.assets[2] = new Asset(errImg,new Vector2f(250,140),new Vector2f(100,32));
+		}
+		
+		try {
+			this.assets[3] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(300,121),new Vector2f(100,32));
+		} catch (IOException e) {
+			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			for(int y = 0; y < 32; y++) {
+				for(int x = 0; x < 100; x++) {
+					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
+				}
+			}
+			this.assets[3] = new Asset(errImg,new Vector2f(300,121),new Vector2f(100,32));
+		}
+		
+		this.hitboxes[0] = new Hitbox(0,206,100,25);
+		this.hitboxes[1] = new Hitbox(200,206,100,25);
+		this.hitboxes[2] = new Hitbox(250,146,100,25);
+		this.hitboxes[3] = new Hitbox(300,121,100,25);
 	}
 
 	public Player getPlayer() {

@@ -7,7 +7,7 @@ public class Model {
 	private Map map;
 	
 	public Model() {
-		
+		this.map = new Map();
 	}
 	
 	public boolean isHighlightHitbox() {
