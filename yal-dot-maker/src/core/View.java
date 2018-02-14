@@ -1,6 +1,7 @@
 package core;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,7 +41,7 @@ public class View extends JFrame{
 		
 		this.container.setLayout(new BorderLayout());
 		this.container.add(this.infoBar.getInfoBar(), BorderLayout.SOUTH);
-		this.container.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.west,this.canvas), BorderLayout.CENTER);
+		this.container.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.west,this.canvas.getCanvas()), BorderLayout.CENTER);
 		
 		this.west.setDividerLocation(520);
 		this.add(this.container);
