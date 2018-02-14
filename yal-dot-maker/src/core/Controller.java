@@ -33,8 +33,8 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.view.getCanvas().requestFocusInWindow();
 		this.view.repaint();
+		System.out.println(this.model.getMap().getName());
 	}
 	
 	@Override
