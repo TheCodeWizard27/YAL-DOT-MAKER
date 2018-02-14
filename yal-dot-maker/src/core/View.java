@@ -26,7 +26,7 @@ public class View extends JFrame{
 	
 	private View(Model model) {
 		super("YAL DOT MAKER");
-		this.tabs = new Tabs();
+		this.tabs = new Tabs(model);
 		this.objectList = new ObjectList();
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.infoBar = new InfoBar();
