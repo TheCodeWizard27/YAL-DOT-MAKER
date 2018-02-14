@@ -1,5 +1,5 @@
 package map;
 
-public class DeathBoxes {
+public class Deathbox {
 
 }
