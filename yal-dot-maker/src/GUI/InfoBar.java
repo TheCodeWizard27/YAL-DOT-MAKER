@@ -29,4 +29,16 @@ public class InfoBar {
 	public JPanel getInfoBar() {
 		return this.container;
 	}
+	public JPanel getContainer() {
+		return container;
+	}
+	public JLabel getPos() {
+		return pos;
+	}
+	public JLabel getCurrObj() {
+		return currObj;
+	}
+	public JLabel getZoom() {
+		return zoom;
+	}
 }
