@@ -22,8 +22,8 @@ public class Map {
 	private BufferedImage backgroundImage;
 	
 	public Map() {
-		this.name = "Own Map";
-		this.size = new Vector2f(800,600);
+		this.name = "Costum Map";
+		this.size = new Vector2f(500,500);
 	}
 	
 	public BufferedImage getPlayer() {
