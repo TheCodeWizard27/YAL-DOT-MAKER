@@ -30,4 +30,10 @@ public class Model {
 	public void setZoom(float zoom) {
 		this.zoom = zoom;
 	}
+	public boolean isCtrl() {
+		return ctrl;
+	}
+	public void setCtrl(boolean ctrl) {
+		this.ctrl = ctrl;
+	}
 }
