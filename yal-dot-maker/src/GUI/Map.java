@@ -22,6 +22,7 @@ public class Map {
 	private BufferedImage backgroundImage;
 	
 	public Map() {
+		this.name = "Own Map";
 		this.size = new Vector2f(800,600);
 	}
 	
