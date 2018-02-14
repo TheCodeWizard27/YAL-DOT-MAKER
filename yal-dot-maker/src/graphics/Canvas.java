@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import GUI.Map;
 import core.Model;
 
 public class Canvas extends JPanel{
@@ -27,18 +28,29 @@ public class Canvas extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
+		//declare for use
 		Graphics2D g2d = (Graphics2D) g;
+		float zoom = this.model.getZoom()/100;
+		Map map = this.model.getMap();
+		BufferedImage display = new BufferedImage((int)(map.getSize().getX()*zoom),(int)(map.getSize().getY()*zoom),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tg2d = (Graphics2D) display.getGraphics();
+		
+		this.setPreferredSize(new Dimension((int)(map.getSize().getX()*zoom),(int)(map.getSize().getY()*zoom)));
+		float imgX = (this.getWidth()/2)-((map.getSize().getX()*zoom)/2);
+		float imgY = (this.getHeight()/2)-((map.getSize().getY()*zoom)/2);
+		
 		g2d.setColor(new Color(150,150,150));
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-		this.setPreferredSize(new Dimension((int)this.model.getMap().getSize().getX(),(int)this.model.getMap().getSize().getY()));
 		
-		BufferedImage testImg = new BufferedImage(1200,800,BufferedImage.TYPE_INT_ARGB);
-		Graphics2D tg2d = (Graphics2D) testImg.getGraphics();
+		tg2d.setColor(Color.WHITE);
+		tg2d.fillRect(0, 0, (int)(map.getSize().getX()*zoom), (int)(map.getSize().getY()*zoom));
+		tg2d.scale(zoom, zoom);	
 		
-		tg2d.fillRect(0, 0, (int)this.model.getMap().getSize().getX(), (int)this.model.getMap().getSize().getY());
+		//drawing
 		
-		g2d.drawImage(testImg, 0, 0, null);
+		//end drawing
 		
+		g2d.drawImage(display, (int)imgX, (int)imgY, null);
 	}
 	
 	public JScrollPane getCanvas() {
