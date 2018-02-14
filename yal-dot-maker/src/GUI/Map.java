@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import graphics.Vector2f;
 import map.Asset;
 import map.Camera;
-import map.DeathBoxes;
+import map.Deathbox;
 import map.EndBox;
 import map.Hitbox;
 
@@ -18,7 +18,7 @@ public class Map {
 	private Camera camera;
 	private ArrayList<Asset> assets;
 	private ArrayList<Hitbox> hitboxes;
-	private ArrayList<DeathBoxes> deathboxes;
+	private ArrayList<Deathbox> deathboxes;
 	private BufferedImage backgroundImage;
 	
 	public Map() {
@@ -27,9 +27,6 @@ public class Map {
 	
 	public BufferedImage getPlayer() {
 		return player;
-	}
-	public void setPlayer(BufferedImage player) {
-		this.player = player;
 	}
 	public String getName() {
 		return name;
@@ -40,39 +37,43 @@ public class Map {
 	public Vector2f getSize() {
 		return size;
 	}
-	public void setSize(Vector2f size) {
-		this.size = size;
-	}
 	public EndBox getEndBox() {
 		return endBox;
-	}
-	public void setEndBox(EndBox endBox) {
-		this.endBox = endBox;
 	}
 	public Camera getCamera() {
 		return camera;
 	}
-	public void setCamera(Camera camera) {
-		this.camera = camera;
-	}
+	
 	public ArrayList<Asset> getAssets() {
 		return assets;
 	}
-	public void setAssets(ArrayList<Asset> assets) {
-		this.assets = assets;
+	public void addAsset(Asset asset) {
+		this.assets.add(asset);
 	}
+	public void rmAsset(Asset asset) {
+		this.assets.remove(asset);
+	}
+	
 	public ArrayList<Hitbox> getHitboxes() {
 		return hitboxes;
 	}
-	public void setHitboxes(ArrayList<Hitbox> hitboxes) {
-		this.hitboxes = hitboxes;
+	public void addHitbox(Hitbox hitbox) {
+		this.hitboxes.add(hitbox);
 	}
-	public ArrayList<DeathBoxes> getDeathboxes() {
+	public void rmHitbox(Hitbox hitbox) {
+		this.hitboxes.remove(hitbox);
+	}
+	
+	public ArrayList<Deathbox> getDeathboxes() {
 		return deathboxes;
 	}
-	public void setDeathboxes(ArrayList<DeathBoxes> deathboxes) {
-		this.deathboxes = deathboxes;
+	public void addDeathbox(Deathbox deathbox) {
+		this.deathboxes.add(deathbox);
 	}
+	public void rmDeathbox(Deathbox deathbox) {
+		this.deathboxes.remove(deathbox);
+	}
+	
 	public BufferedImage getBackgroundImage() {
 		return backgroundImage;
 	}
