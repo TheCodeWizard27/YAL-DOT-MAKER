@@ -24,8 +24,8 @@ public class Camera {
 		playerCenter.addToBoth(new Vector2f(16/2,32/2));
 		cameraCenter.addToBoth(new Vector2f(this.size.getX()/2,this.size.getY()/2));
 		
-		cameraCenter.addToX((cameraCenter.getX() - playerCenter.getX())*-.1f);
-		cameraCenter.addToY((cameraCenter.getY() - playerCenter.getY())*-.1f);
+		cameraCenter.addToX((cameraCenter.getX() - playerCenter.getX())*-.05f);
+		cameraCenter.addToY((cameraCenter.getY() - playerCenter.getY())*-.05f);
 		cameraCenter.addToBoth(new Vector2f(this.size.getX()/-2,this.size.getY()/-2));
 		
 		this.pos.setVector2f(cameraCenter);

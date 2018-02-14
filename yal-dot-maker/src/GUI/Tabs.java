@@ -10,10 +10,10 @@ import javax.swing.JTabbedPane;
 import constants.MapProperty;
 import core.Model;
 
-public class Tabs {
+public class Tabs{
 	private JTabbedPane tabs;
 	private JPanel mapSettingsTab;
-	private JPanel objectExplorerTab;
+	private ObjectExplorer objectExplorerTab;
 	private JPanel objectSettingsTab;
 	
 	public Tabs(Model model) {
@@ -57,7 +57,8 @@ public class Tabs {
 	}
 	
 	public void addObjectExplorer() {
-		this.objectExplorerTab = new JPanel();
+		this.objectExplorerTab = new ObjectExplorer();
+		
 	}
 	
 	public void addObjectSettings() {
