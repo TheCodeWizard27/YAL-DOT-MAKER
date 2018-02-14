@@ -26,6 +26,7 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 		
 		this.timer = new Timer(20,this);
 		this.timer.start();
+		this.view.getObjectList().update();
 	}
 	
 	/**
@@ -33,8 +34,8 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.model.setCurrentObj(this.view.getObjectList().getObjects().get(this.view.getObjectList().getList().getSelectedValue()));
 		this.view.repaint();
-		System.out.println(this.model.getMap().getName());
 	}
 	
 	@Override

@@ -6,11 +6,13 @@ import java.awt.image.BufferedImage;
 import graphics.Vector2f;
 
 public class Asset {
+	private String name;
 	private BufferedImage sprite;
 	private Vector2f pos;
 	private Vector2f size;
 	
-	public Asset(BufferedImage sprite, Vector2f pos, Vector2f size) {
+	public Asset(BufferedImage sprite, String name, Vector2f pos, Vector2f size) {
+		this.setName(name);
 		this.sprite = sprite;
 		this.pos = pos;
 		this.size = size;
@@ -45,5 +47,11 @@ public class Asset {
 	}
 	public Vector2f getSize() {
 		return size;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

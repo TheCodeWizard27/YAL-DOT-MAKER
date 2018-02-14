@@ -1,19 +1,26 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 import constants.ObjectModes;
+import core.Model;
+import core.View;
+import map.Asset;
+import map.Deathbox;
+import map.Hitbox;
 
 public class ObjectList {
+	private Model model;
+	
 	private JPanel container;
 	private JList objectsList;
 	private DefaultListModel list;
@@ -21,7 +28,10 @@ public class ObjectList {
 	private JScrollPane scrollPane;
 	private ObjectListBtn[] buttons = new ObjectListBtn[4];
 	
-	public ObjectList(){
+	private HashMap<String, Object> objects = new HashMap<String,Object>();
+	
+	public ObjectList(Model model, View view){
+		this.model = model;
 		this.container = new JPanel();
 		this.btnContainer = new JPanel();
 		
@@ -30,21 +40,11 @@ public class ObjectList {
 		this.objectsList.setLayoutOrientation(JList.VERTICAL);
 		
 		this.list = new DefaultListModel();
-		this.list.addElement("camera");
-		this.list.addElement("background");
-		this.list.addElement("nstuff");
-		this.list.addElement("camera");
-		this.list.addElement("background");
-		this.list.addElement("nstuff");
-		this.list.addElement("camera");
-		this.list.addElement("background");
-		this.list.addElement("nstuff");
-		
 		this.objectsList.setModel(this.list);
 		
 		int i = 0;
 		for(ObjectModes mode : ObjectModes.values()) {
-			this.buttons[i] = new ObjectListBtn(mode);
+			this.buttons[i] = new ObjectListBtn(view, model, mode);
 			this.btnContainer.add(this.buttons[i]);
 			i++;
 		}
@@ -58,5 +58,38 @@ public class ObjectList {
 	
 	public JPanel getObjectList() {
 		return this.container;
+	}
+	
+	public JList getList() {
+		return this.objectsList;
+	}
+	
+	public HashMap<String, Object> getObjects(){
+		return this.objects;
+	}
+	
+	public void update() {
+		Map map = this.model.getMap();
+		
+		this.objects.put("Camera", map.getCamera());
+		this.objects.put("Player", map.getPlayer());
+		this.objects.put("Goalbox", map.getEndBox());
+		
+		for(Hitbox hitbox : map.getHitboxes()) {
+			this.objects.put(hitbox.getName(), hitbox);
+		}
+		
+		for(Deathbox deathbox : map.getDeathboxes()) {
+			this.objects.put(deathbox.getName(), deathbox);
+		}
+		
+		for(Asset asset : map.getAssets()) {
+			this.objects.put(asset.getName(), asset);
+		}
+		
+		this.list.clear();
+		for(Entry<String,Object> list : this.objects.entrySet()) {
+			this.list.addElement(list.getKey());
+		}
 	}
 }

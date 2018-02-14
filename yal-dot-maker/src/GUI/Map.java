@@ -9,16 +9,17 @@ import map.Camera;
 import map.Deathbox;
 import map.EndBox;
 import map.Hitbox;
+import map.Player;
 
 public class Map {
-	private BufferedImage player;
+	private Player player = new Player();
 	private String name;
 	private Vector2f size;
-	private EndBox endBox;
-	private Camera camera;
-	private ArrayList<Asset> assets;
-	private ArrayList<Hitbox> hitboxes;
-	private ArrayList<Deathbox> deathboxes;
+	private EndBox endBox = new EndBox();
+	private Camera camera = new Camera();
+	private ArrayList<Asset> assets = new ArrayList<Asset>();
+	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
+	private ArrayList<Deathbox> deathboxes = new ArrayList<Deathbox>();
 	private BufferedImage backgroundImage;
 	
 	public Map() {
@@ -26,7 +27,7 @@ public class Map {
 		this.size = new Vector2f(500,500);
 	}
 	
-	public BufferedImage getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 	public String getName() {

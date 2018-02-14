@@ -27,7 +27,7 @@ public class View extends JFrame{
 	private View(Model model) {
 		super("YAL DOT MAKER");
 		this.tabs = new Tabs(model);
-		this.objectList = new ObjectList();
+		this.objectList = new ObjectList(model, this);
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.infoBar = new InfoBar();
 		this.canvas = new Canvas(model);
@@ -56,34 +56,33 @@ public class View extends JFrame{
 		return View.view;
 	}
 	
+	public ObjectList getObjectList() {
+		return objectList;
+	}
+	public void setObjectList(ObjectList objectList) {
+		this.objectList = objectList;
+	}
 	public Canvas getCanvas() {
 		return this.canvas;
 	}
-
 	public Model getModel() {
 		return model;
 	}
-
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
 	public MenuBar getMenu() {
 		return menu;
 	}
-
 	public void setMenu(MenuBar menu) {
 		this.menu = menu;
 	}
-
 	public InfoBar getInfoBar() {
 		return infoBar;
 	}
-
 	public void setInfoBar(InfoBar infoBar) {
 		this.infoBar = infoBar;
 	}
-	
 	public JPanel getContainer() {
 		return this.container;
 	}
