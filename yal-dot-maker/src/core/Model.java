@@ -7,6 +7,7 @@ public class Model {
 	private Map map;
 	private float zoom = 100;
 	private boolean ctrl = false;
+	private Object currentObj;
 	
 	public Model() {
 		this.map = new Map();
@@ -35,5 +36,11 @@ public class Model {
 	}
 	public void setCtrl(boolean ctrl) {
 		this.ctrl = ctrl;
+	}
+	public Object getCurrentObj() {
+		return currentObj;
+	}
+	public void setCurrentObj(Object currentObj) {
+		this.currentObj = currentObj;
 	}
 }
