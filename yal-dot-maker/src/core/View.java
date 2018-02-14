@@ -83,4 +83,8 @@ public class View extends JFrame{
 	public void setInfoBar(InfoBar infoBar) {
 		this.infoBar = infoBar;
 	}
+	
+	public JPanel getContainer() {
+		return this.container;
+	}
 }
