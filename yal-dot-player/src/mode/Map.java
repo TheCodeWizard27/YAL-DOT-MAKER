@@ -27,16 +27,22 @@ public class Map {
 		this.bounds = new Hitbox(0,0,600,600);
 		
 		try {
-			this.backgroundImg = ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt3.png"));
+			this.backgroundImg = ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\Unbenannt3.png"));
 		} catch (IOException e) {
-			System.out.println("Error");
+			BufferedImage errImg = new BufferedImage((int)this.bounds.getSize().getX(),(int)this.bounds.getSize().getY(),BufferedImage.TYPE_INT_ARGB);
+			for(int y = 0; y < (int)this.bounds.getSize().getY(); y++) {
+				for(int x = 0; x < (int)this.bounds.getSize().getX(); x++) {
+					errImg.setRGB(x, y, new Color(255,255,255).getRGB());
+				}
+			}
+			this.backgroundImg = errImg;
 		}
 		
 		//debugging
 		try {
-			this.assets[0] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(0,200),new Vector2f(100,32));
+			this.assets[0] = new Asset(ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\Unbenannt2.png")),new Vector2f(0,200),new Vector2f(100,32));
 		} catch (IOException e) {
-			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			BufferedImage errImg = new BufferedImage(100,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
 				for(int x = 0; x < 100; x++) {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
@@ -46,9 +52,9 @@ public class Map {
 		}
 		
 		try {
-			this.assets[1] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(200,200),new Vector2f(100,32));
+			this.assets[1] = new Asset(ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\Unbenannt2.png")),new Vector2f(200,200),new Vector2f(100,32));
 		} catch (IOException e) {
-			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			BufferedImage errImg = new BufferedImage(100,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
 				for(int x = 0; x < 100; x++) {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
@@ -58,9 +64,9 @@ public class Map {
 		}
 		
 		try {
-			this.assets[2] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(250,140),new Vector2f(100,32));
+			this.assets[2] = new Asset(ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\Unbenannt2.png")),new Vector2f(250,140),new Vector2f(100,32));
 		} catch (IOException e) {
-			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			BufferedImage errImg = new BufferedImage(100,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
 				for(int x = 0; x < 100; x++) {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
@@ -70,9 +76,9 @@ public class Map {
 		}
 		
 		try {
-			this.assets[3] = new Asset(ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt2.png")),new Vector2f(300,121),new Vector2f(100,32));
+			this.assets[3] = new Asset(ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\Unbenannt2.png")),new Vector2f(300,121),new Vector2f(100,32));
 		} catch (IOException e) {
-			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
+			BufferedImage errImg = new BufferedImage(100,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
 				for(int x = 0; x < 100; x++) {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
