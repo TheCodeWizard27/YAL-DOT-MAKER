@@ -19,7 +19,7 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 		this.model = new Model();
 		this.view = View.getInstance(this.model);
 		
-		this.timer = new Timer(500,this);
+		this.timer = new Timer(20,this);
 		this.timer.start();
 	}
 	
