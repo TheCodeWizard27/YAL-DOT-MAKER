@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -12,7 +14,7 @@ import javax.swing.JScrollPane;
 import GUI.Map;
 import core.Model;
 
-public class Canvas extends JPanel{
+public class Canvas extends JPanel implements MouseListener{
 	private Model model;
 	private JScrollPane scrollBar;
 	
@@ -23,6 +25,7 @@ public class Canvas extends JPanel{
 		this.scrollBar = new JScrollPane(this);
 		this.scrollBar.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		this.addMouseListener(this);
 		
 		this.setPreferredSize(new Dimension((int)this.model.getMap().getSize().getX(),(int)this.model.getMap().getSize().getY()));
 	}
@@ -56,4 +59,21 @@ public class Canvas extends JPanel{
 	public JScrollPane getCanvas() {
 		return this.scrollBar;
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		this.requestFocus();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 }
