@@ -27,6 +27,5 @@ public class HitboxCheck extends JCheckBox implements ActionListener{
 		}else {
 			this.model.setHighlightHitbox(true);
 		}
-		System.out.println(this.model.isHighlightHitbox());
 	}
 }
