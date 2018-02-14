@@ -42,7 +42,7 @@ public class Canvas extends JPanel{
 			if(this.model.getMap() == null) {
 				this.showLoadingScreen(g);
 			}else {
-				this.drawEngine.requestFocus();
+				this.drawEngine.requestFocusInWindow();
 				this.showGame(g);
 			}
 		}
