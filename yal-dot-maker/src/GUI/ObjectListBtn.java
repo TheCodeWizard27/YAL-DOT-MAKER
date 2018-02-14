@@ -45,5 +45,7 @@ public class ObjectListBtn extends JButton implements ActionListener{
 			}
 			break;
 		}
+		
+		this.view.getObjectList().update();
 	}
 }
