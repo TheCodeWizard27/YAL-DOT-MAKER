@@ -2,13 +2,13 @@ package GUI;
 
 import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import constants.MapProperty;
 import core.Model;
+import core.View;
 
 public class Tabs{
 	private JTabbedPane tabs;
@@ -16,12 +16,12 @@ public class Tabs{
 	private ObjectExplorer objectExplorerTab;
 	private JPanel objectSettingsTab;
 	
-	public Tabs(Model model) {
+	public Tabs(Model model, View view) {
 		this.tabs = new JTabbedPane();
 		this.tabs.setPreferredSize(new Dimension(350,400));
 		
 		this.addMapSettings(model);
-		this.addObjectExplorer();
+		this.addObjectExplorer(view, model);
 		this.addObjectSettings();
 		
 		this.tabs.add("Map Settings", this.mapSettingsTab);
@@ -56,8 +56,8 @@ public class Tabs{
 		}
 	}
 	
-	public void addObjectExplorer() {
-		this.objectExplorerTab = new ObjectExplorer();
+	public void addObjectExplorer(View view, Model model) {
+		this.objectExplorerTab = new ObjectExplorer(view, model);
 		
 	}
 	
