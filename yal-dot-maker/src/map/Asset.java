@@ -24,6 +24,13 @@ public class Asset {
 		this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 	}
 	
+	public Asset(Asset asset) {
+		this.name = asset.getName();
+		this.sprite = asset.getSprite();
+		this.pos = new Vector2f(asset.getPos());
+		this.size = new Vector2f(asset.getSize());
+	}
+	
 	public void setSize(Vector2f size) {
 		BufferedImage tempImg = new BufferedImage((int)this.size.getX(),(int)this.size.getY(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D tempG2d = (Graphics2D) tempImg.getGraphics();
