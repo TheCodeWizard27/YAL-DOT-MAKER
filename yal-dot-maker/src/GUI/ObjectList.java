@@ -71,6 +71,8 @@ public class ObjectList {
 	
 	public void update() {
 		Map map = this.model.getMap();
+	
+		this.objects.clear();
 		
 		this.objects.put("Camera", map.getCamera());
 		this.objects.put("Player", map.getPlayer());

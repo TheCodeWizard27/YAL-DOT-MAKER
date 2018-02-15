@@ -59,5 +59,6 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		this.view.getObjectList().update();
 	}
 }

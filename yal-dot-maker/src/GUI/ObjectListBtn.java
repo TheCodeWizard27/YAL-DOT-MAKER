@@ -9,8 +9,7 @@ import constants.ObjectModes;
 import core.Model;
 import core.View;
 import map.Asset;
-import map.Camera;
-import map.Player;
+import map.Deathbox;
 
 public class ObjectListBtn extends JButton implements ActionListener{
 	private View view;
@@ -32,6 +31,28 @@ public class ObjectListBtn extends JButton implements ActionListener{
 		
 		switch(this.type) {
 		case COPY:
+			if(map.getAssets().contains(object)) {
+				Asset asset = new Asset((Asset)object);
+				asset.setName(asset.getName() + "(copy)");
+				map.getAssets().add(asset);
+			}else if(map.getDeathboxes().contains(object)) {
+				map.getDeathboxes().remove(object);
+				Deathbox deathbox = new Deathbox((Deathbox)object);
+				deathbox.setName(deathbox.getName() + "(copy)");
+			}else if(map.getHitboxes().contains(object)) {
+				map.getHitboxes().remove(object);
+				Asset asset = new Asset((Asset)object);
+				asset.setName(asset.getName() + "(copy)");
+			}else if(map.getEndBox().contains(object)){
+				map.getEndBox().remove(object);
+				Asset asset = new Asset((Asset)object);
+				asset.setName(asset.getName() + "(copy)");
+			}else {
+				
+			}
+			
+			this.view.getObjectList().update();
+			
 			break;
 		case DELETE:
 			if(map.getAssets().contains(object)) {
@@ -39,10 +60,15 @@ public class ObjectListBtn extends JButton implements ActionListener{
 			}else if(map.getDeathboxes().contains(object)) {
 				map.getDeathboxes().remove(object);
 			}else if(map.getHitboxes().contains(object)) {
-				map.getHitboxes().contains(object);
+				map.getHitboxes().remove(object);
+			}else if(map.getEndBox().contains(object)){
+				map.getEndBox().remove(object);
 			}else {
-				//print out failure
+				
 			}
+			
+			this.view.getObjectList().update();
+			
 			break;
 		}
 		
