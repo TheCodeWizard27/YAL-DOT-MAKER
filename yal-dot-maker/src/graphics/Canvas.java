@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ import map.Deathbox;
 import map.EndBox;
 import map.Hitbox;
 
-public class Canvas extends JPanel implements MouseListener{
+public class Canvas extends JPanel implements MouseListener, MouseMotionListener{
 	private Model model;
 	private JScrollPane scrollBar;
 	
@@ -99,4 +100,16 @@ public class Canvas extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
