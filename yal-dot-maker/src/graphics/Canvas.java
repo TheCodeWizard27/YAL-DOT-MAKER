@@ -13,6 +13,9 @@ import javax.swing.JScrollPane;
 
 import GUI.Map;
 import core.Model;
+import map.Asset;
+import map.Deathbox;
+import map.EndBox;
 import map.Hitbox;
 
 public class Canvas extends JPanel implements MouseListener{
@@ -52,10 +55,22 @@ public class Canvas extends JPanel implements MouseListener{
 		
 		//drawing
 		
+		for(Asset asset : map.getAssets()) {
+			tg2d.drawImage(asset.getSprite(), (int)asset.getPos().getX(), (int)asset.getPos().getY(), null);
+		}
+		
 		if(this.model.isHighlightHitbox()) {
 			for(Hitbox hitbox : map.getHitboxes()) {
 				tg2d.setColor(new Color(255,0,255));
 				tg2d.drawRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
+			}
+			for(EndBox goal : map.getEndBox()) {
+				tg2d.setColor(new Color(0,255,0));
+				tg2d.drawRect((int)goal.getPos().getX(), (int)goal.getPos().getY(), (int)goal.getSize().getX(), (int)goal.getSize().getY());
+			}
+			for(Deathbox deathbox : map.getDeathboxes()) {
+				tg2d.setColor(new Color(255,0,0));
+				tg2d.drawRect((int)deathbox.getPos().getX(), (int)deathbox.getPos().getY(), (int)deathbox.getSize().getX(), (int)deathbox.getSize().getY());
 			}
 		}
 		
