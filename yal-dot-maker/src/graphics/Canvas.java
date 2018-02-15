@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 
 import GUI.Map;
 import core.Model;
+import map.Hitbox;
 
 public class Canvas extends JPanel implements MouseListener{
 	private Model model;
@@ -50,6 +51,13 @@ public class Canvas extends JPanel implements MouseListener{
 		tg2d.scale(zoom, zoom);	
 		
 		//drawing
+		
+		if(this.model.isHighlightHitbox()) {
+			for(Hitbox hitbox : map.getHitboxes()) {
+				tg2d.setColor(new Color(255,0,255));
+				tg2d.drawRect((int)hitbox.getPos().getX(), (int)hitbox.getPos().getY(), (int)hitbox.getSize().getX(), (int)hitbox.getSize().getY());
+			}
+		}
 		
 		//end drawing
 		

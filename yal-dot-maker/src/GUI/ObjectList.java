@@ -16,6 +16,7 @@ import core.Model;
 import core.View;
 import map.Asset;
 import map.Deathbox;
+import map.EndBox;
 import map.Hitbox;
 
 public class ObjectList {
@@ -73,7 +74,10 @@ public class ObjectList {
 		
 		this.objects.put("Camera", map.getCamera());
 		this.objects.put("Player", map.getPlayer());
-		this.objects.put("Goalbox", map.getEndBox());
+		
+		for(EndBox endbox : map.getEndBox()) {
+			this.objects.put(endbox.getName(), endbox);
+		}
 		
 		for(Hitbox hitbox : map.getHitboxes()) {
 			this.objects.put(hitbox.getName(), hitbox);

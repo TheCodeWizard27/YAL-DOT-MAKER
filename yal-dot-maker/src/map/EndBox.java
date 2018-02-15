@@ -1,5 +1,11 @@
 package map;
 
-public class EndBox {
+import graphics.Vector2f;
+
+public class EndBox extends Hitbox{
+
+	public EndBox(String name, Vector2f pos, Vector2f size) {
+		super(name, pos, size);
+	}
 
 }

@@ -15,7 +15,7 @@ public class Map {
 	private Player player = new Player();
 	private String name;
 	private Vector2f size;
-	private EndBox endBox = new EndBox();
+	private ArrayList<EndBox> endBox = new ArrayList<EndBox>();
 	private Camera camera = new Camera();
 	private ArrayList<Asset> assets = new ArrayList<Asset>();
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
@@ -39,7 +39,7 @@ public class Map {
 	public Vector2f getSize() {
 		return size;
 	}
-	public EndBox getEndBox() {
+	public ArrayList<EndBox> getEndBox() {
 		return endBox;
 	}
 	public Camera getCamera() {

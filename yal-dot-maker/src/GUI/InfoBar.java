@@ -15,8 +15,8 @@ public class InfoBar {
 	
 	public InfoBar() {
 		this.container = new JPanel();
-		this.pos = new JLabel("current X / Y :      ");
-		this.currObj = new JLabel("current object :      ");
+		this.pos = new JLabel("Current X / Y :      ");
+		this.currObj = new JLabel("Current Object :      ");
 		this.zoom = new JLabel("Zoom : 100%");
 		
 		this.container.setLayout(new BorderLayout());
