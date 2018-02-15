@@ -2,11 +2,14 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
@@ -35,9 +38,15 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 		
-		if(sprite == null)
+		if(sprite == null) {
 			this.setText(type.toString().toLowerCase());
 			this.setIcon(UIManager.getIcon("Tree.leafIcon"));
+		}else {
+			Image tempIcon = sprite.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+			
+			this.setIcon(new ImageIcon(tempIcon));
+			this.sprite = sprite;
+		}
 	}
 	
 	public ObjectType getType() {
@@ -101,22 +110,22 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 					break;
 				case ASSET:
 					String name3 = "Asset" + map.getAssets().size();
+					BufferedImage tempSprite;
 					Asset tempObj3;
 					
 					if(this.sprite == null) {
-						this.sprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
+						tempSprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
 						
 						for(int y = 0; y < 100; y++) {
 							for(int x = 0; x < 100; x++) {
-								this.sprite.setRGB(x, y, new Color(150,150,100).getRGB());
+								tempSprite.setRGB(x, y, new Color(150,150,100).getRGB());
 							}
 						}
-						tempObj3 = new Asset(this.sprite, name3, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+						tempObj3 = new Asset(tempSprite, name3, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					}else {
-						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)(mouseX-imgX-this.sprite.getWidth()*zoom),(float)(mouseX-imgX-this.sprite.getWidth()*zoom))
+						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)((mouseX-imgX-this.sprite.getWidth()*zoom)/2),(float)(mouseX-imgX-this.sprite.getWidth()*zoom)/2)
 								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()));
 					}
-					
 					
 					this.model.getMap().getAssets().add(tempObj3);
 					break;
