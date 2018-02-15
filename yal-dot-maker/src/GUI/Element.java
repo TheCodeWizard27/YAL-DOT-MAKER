@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,6 +15,9 @@ import core.Model;
 import core.View;
 import graphics.Canvas;
 import graphics.Vector2f;
+import map.Asset;
+import map.Deathbox;
+import map.EndBox;
 import map.Hitbox;
 
 public class Element extends JLabel implements MouseMotionListener, MouseListener{
@@ -70,25 +74,51 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 		
 		if(canvas.getMousePosition() != null) {
 			
+			Map map = this.model.getMap();
 			float zoom = this.model.getZoom()/100;
-			float imgX = (canvas.getWidth()/2)-((this.model.getMap().getSize().getX()*zoom)/2);
-			float imgY = (canvas.getHeight()/2)-((this.model.getMap().getSize().getY()*zoom)/2);
+			float imgX = (canvas.getWidth()/2)-((map.getSize().getX()*zoom)/2);
+			float imgY = (canvas.getHeight()/2)-((map.getSize().getY()*zoom)/2);
 			double mouseX = canvas.getMousePosition().getX();
 			double mouseY = canvas.getMousePosition().getY();
 			
-			if(mouseX >= imgX && mouseX <= imgX + this.model.getMap().getSize().getX() && mouseY >= imgY && mouseY <= imgY + this.model.getMap().getSize().getY()) {
+			if(mouseX >= imgX && mouseX <= imgX + map.getSize().getX()*zoom &&
+					mouseY >= imgY && mouseY <= imgY + map.getSize().getY()*zoom) {
 				switch(this.type) {
 				case HITBOX:
-					String name = "Hitbox" + this.model.getMap().getHitboxes().size();
-					Hitbox tempObj = new Hitbox(name, new Vector2f((float)(mouseX-imgX-50*zoom),(float)(mouseY-imgY-50*zoom)), new Vector2f(100,100));
+					String name = "Hitbox" + map.getHitboxes().size();
+					Hitbox tempObj = new Hitbox(name, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					this.model.getMap().getHitboxes().add(tempObj);
-					
 					break;
 				case DEATHBOX:
+					String name1 = "Deathbox" + map.getDeathboxes().size();
+					Deathbox tempObj1 = new Deathbox(name1, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					this.model.getMap().getDeathboxes().add(tempObj1);
 					break;
 				case GOALBOX:
+					String name2 = "Goalbox" + map.getEndBox().size();
+					EndBox tempObj2 = new EndBox(name2, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					this.model.getMap().getEndBox().add(tempObj2);
 					break;
 				case ASSET:
+					String name3 = "Asset" + map.getAssets().size();
+					Asset tempObj3;
+					
+					if(this.sprite == null) {
+						this.sprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
+						
+						for(int y = 0; y < 100; y++) {
+							for(int x = 0; x < 100; x++) {
+								this.sprite.setRGB(x, y, new Color(150,150,100).getRGB());
+							}
+						}
+						tempObj3 = new Asset(this.sprite, name3, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					}else {
+						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)(mouseX-imgX-this.sprite.getWidth()*zoom),(float)(mouseX-imgX-this.sprite.getWidth()*zoom))
+								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()));
+					}
+					
+					
+					this.model.getMap().getAssets().add(tempObj3);
 					break;
 				}
 			}
@@ -98,10 +128,11 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 	}
 }
