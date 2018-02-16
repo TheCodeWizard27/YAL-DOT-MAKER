@@ -95,8 +95,8 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 				switch(this.type) {
 				case HITBOX:
 					String name = "Hitbox" + map.getHitboxes().size();
-					Hitbox tempObj = new Hitbox(name, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
-					this.model.getMap().getHitboxes().add(tempObj);
+					//Hitbox tempObj = new Hitbox(name, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					//this.model.getMap().getHitboxes().add(tempObj);
 					break;
 				case DEATHBOX:
 					String name1 = "Deathbox" + map.getDeathboxes().size();
