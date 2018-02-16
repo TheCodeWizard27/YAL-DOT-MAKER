@@ -86,4 +86,10 @@ public class View extends JFrame{
 	public JPanel getContainer() {
 		return this.container;
 	}
+	public Tabs getTabs() {
+		return tabs;
+	}
+	public void setTabs(Tabs tabs) {
+		this.tabs = tabs;
+	}
 }

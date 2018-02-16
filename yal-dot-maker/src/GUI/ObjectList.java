@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import constants.ObjectModes;
 import core.Model;
@@ -20,8 +22,9 @@ import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
-public class ObjectList {
+public class ObjectList implements ListSelectionListener{
 	private Model model;
+	private View view;
 	
 	private JPanel container;
 	private JList objectsList;
@@ -34,6 +37,7 @@ public class ObjectList {
 	
 	public ObjectList(Model model, View view){
 		this.model = model;
+		this.view = view;
 		this.container = new JPanel();
 		this.btnContainer = new JPanel();
 		
@@ -56,6 +60,7 @@ public class ObjectList {
 		this.container.add(this.scrollPane,BorderLayout.NORTH);
 		this.container.add(this.btnContainer,BorderLayout.SOUTH);
 		this.container.setBorder(LineBorder.createBlackLineBorder());
+		this.objectsList.addListSelectionListener(this);
 	}
 	
 	public JPanel getObjectList() {
@@ -98,5 +103,10 @@ public class ObjectList {
 		for(Entry<String,ElementTemplate> list : this.objects.entrySet()) {
 			this.list.addElement(list.getKey());
 		}
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		this.view.getTabs().addObjectSettings();
 	}
 }
