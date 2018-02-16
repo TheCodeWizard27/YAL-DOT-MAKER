@@ -90,7 +90,7 @@ public class Canvas extends JPanel{
 		
 		if(this.model.isHitboxVisible()) {
 			g2d.setColor(new Color(0,255,0,150));
-			g2d.drawRect((int)player.getHitbox().getPos().getX()-cX, (int)player.getHitbox().getPos().getY()-cY, 16, 32);
+			g2d.drawRect((int)player.getHitbox().getPos().getX()-cX, (int)player.getHitbox().getPos().getY()-cY, (int)player.getHitbox().getSize().getX(), (int)player.getHitbox().getSize().getY());
 			
 			g2d.setColor(new Color(255,0,255,150));
 			for(Hitbox hitbox : map.getHitboxes()) {
