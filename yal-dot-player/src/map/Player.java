@@ -28,10 +28,10 @@ public class Player {
 	public Player(Vector2f pos) {
 		this.pos = pos;
 		this.speed = new Vector2f(0,0);
-		this.hitbox = new Hitbox(pos.getX(),pos.getY(),16,32);
+		this.hitbox = new Hitbox(pos.getX(),pos.getY(),38,64);
 		
 		try {
-			this.sprite = ImageIO.read(new File("C:\\Users\\benny\\Desktop\\Unbenannt.png"));
+			this.sprite = ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\unnamed.png"));
 		} catch (IOException e) {
 			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
 			for(int y = 0; y < 32; y++) {
