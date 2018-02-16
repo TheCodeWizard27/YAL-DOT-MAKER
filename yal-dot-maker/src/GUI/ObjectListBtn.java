@@ -10,6 +10,8 @@ import core.Model;
 import core.View;
 import map.Asset;
 import map.Deathbox;
+import map.EndBox;
+import map.Hitbox;
 
 public class ObjectListBtn extends JButton implements ActionListener{
 	private View view;
@@ -36,22 +38,20 @@ public class ObjectListBtn extends JButton implements ActionListener{
 				asset.setName(asset.getName() + "(copy)");
 				map.getAssets().add(asset);
 			}else if(map.getDeathboxes().contains(object)) {
-				map.getDeathboxes().remove(object);
-				Deathbox deathbox = new Deathbox((Deathbox)object);
+				Deathbox deathbox = new Deathbox((Deathbox) object);
 				deathbox.setName(deathbox.getName() + "(copy)");
+				map.getDeathboxes().add(deathbox);
 			}else if(map.getHitboxes().contains(object)) {
-				map.getHitboxes().remove(object);
-				Asset asset = new Asset((Asset)object);
-				asset.setName(asset.getName() + "(copy)");
+				Hitbox hitbox = new Hitbox((Hitbox) object);
+				hitbox.setName(hitbox.getName() + "(copy)");
+				map.getHitboxes().add(hitbox);
 			}else if(map.getEndBox().contains(object)){
-				map.getEndBox().remove(object);
-				Asset asset = new Asset((Asset)object);
-				asset.setName(asset.getName() + "(copy)");
+				EndBox endbox = new EndBox((EndBox) object);
+				endbox.setName(endbox.getName() + "(copy)");
+				map.getEndBox().add(endbox);
 			}else {
 				
 			}
-			
-			this.view.getObjectList().update();
 			
 			break;
 		case DELETE:
@@ -66,8 +66,6 @@ public class ObjectListBtn extends JButton implements ActionListener{
 			}else {
 				
 			}
-			
-			this.view.getObjectList().update();
 			
 			break;
 		}

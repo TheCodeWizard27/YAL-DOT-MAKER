@@ -16,6 +16,7 @@ import core.Model;
 import core.View;
 import map.Asset;
 import map.Deathbox;
+import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
@@ -29,7 +30,7 @@ public class ObjectList {
 	private JScrollPane scrollPane;
 	private ObjectListBtn[] buttons = new ObjectListBtn[4];
 	
-	private HashMap<String, Object> objects = new HashMap<String,Object>();
+	private HashMap<String, ElementTemplate> objects = new HashMap<String,ElementTemplate>();
 	
 	public ObjectList(Model model, View view){
 		this.model = model;
@@ -65,7 +66,7 @@ public class ObjectList {
 		return this.objectsList;
 	}
 	
-	public HashMap<String, Object> getObjects(){
+	public HashMap<String, ElementTemplate> getObjects(){
 		return this.objects;
 	}
 	
@@ -94,7 +95,7 @@ public class ObjectList {
 		}
 		
 		this.list.clear();
-		for(Entry<String,Object> list : this.objects.entrySet()) {
+		for(Entry<String,ElementTemplate> list : this.objects.entrySet()) {
 			this.list.addElement(list.getKey());
 		}
 	}

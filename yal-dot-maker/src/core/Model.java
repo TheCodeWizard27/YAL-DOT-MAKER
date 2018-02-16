@@ -1,13 +1,14 @@
 package core;
 
 import GUI.Map;
+import map.ElementTemplate;
 
 public class Model {
 	private boolean highlightHitbox;
 	private Map map;
 	private float zoom = 100;
 	private boolean ctrl = false;
-	private Object currentObj;
+	private ElementTemplate currentObj;
 	
 	public Model() {
 		this.map = new Map();
@@ -37,10 +38,10 @@ public class Model {
 	public void setCtrl(boolean ctrl) {
 		this.ctrl = ctrl;
 	}
-	public Object getCurrentObj() {
+	public ElementTemplate getCurrentObj() {
 		return currentObj;
 	}
-	public void setCurrentObj(Object currentObj) {
+	public void setCurrentObj(ElementTemplate currentObj) {
 		this.currentObj = currentObj;
 	}
 }
