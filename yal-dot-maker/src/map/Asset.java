@@ -5,30 +5,28 @@ import java.awt.image.BufferedImage;
 
 import graphics.Vector2f;
 
-public class Asset {
-	private String name;
+public class Asset extends ElementTemplate{
 	private BufferedImage sprite;
-	private Vector2f pos;
-	private Vector2f size;
 	
 	public Asset(BufferedImage sprite, String name, Vector2f pos, Vector2f size) {
-		this.setName(name);
+		super(name,pos,size);
 		this.sprite = sprite;
-		this.pos = pos;
-		this.size = size;
 	}
 	
-	public Asset(BufferedImage sprite, Vector2f pos) {
+	public Asset(String name, BufferedImage sprite, Vector2f pos) {
+		super(name, pos, new Vector2f(sprite.getWidth(), sprite.getHeight()));
 		this.sprite = sprite;
-		this.pos = pos;
-		this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 	}
 	
 	public Asset(Asset asset) {
-		this.name = asset.getName();
+		super(asset.getName(), asset.getPos(), asset.getSize());
+		BufferedImage spriteCopy = new BufferedImage(asset.getSprite().getWidth(),asset.getSprite().getHeight(),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = (Graphics2D) spriteCopy.getGraphics();
+		
+		g2d.scale(spriteCopy.getWidth()/size.getX(), spriteCopy.getHeight()/size.getY());
+		g2d.drawImage(this.sprite,0,0,null);
+		
 		this.sprite = asset.getSprite();
-		this.pos = new Vector2f(asset.getPos());
-		this.size = new Vector2f(asset.getSize());
 	}
 	
 	public void setSize(Vector2f size) {
@@ -45,20 +43,5 @@ public class Asset {
 	}
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
-	}
-	public Vector2f getPos() {
-		return pos;
-	}
-	public void setPos(Vector2f pos) {
-		this.pos = pos;
-	}
-	public Vector2f getSize() {
-		return size;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 }
