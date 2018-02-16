@@ -123,7 +123,7 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 						}
 						tempObj3 = new Asset(tempSprite, name3, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					}else {
-						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)((mouseX-imgX-this.sprite.getWidth()*zoom)/2),(float)(mouseX-imgX-this.sprite.getWidth()*zoom)/2)
+						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)((mouseX-imgX-((this.sprite.getWidth()*zoom)/2))),(float)(mouseY-imgY-((this.sprite.getHeight()*zoom)/2)))
 								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()));
 					}
 					
