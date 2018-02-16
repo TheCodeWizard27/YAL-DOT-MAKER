@@ -35,9 +35,10 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.model.setCurrentObj(this.view.getObjectList().getObjects().get(this.view.getObjectList().getList().getSelectedValue()));
-		if(this.model.getCurrentObj() != null)
+		if(this.model.getCurrentObj() != null) {
 			this.view.getInfoBar().getCurrObj().setText("Current Object : " + this.view.getObjectList().getList().getSelectedValue());
-		
+			this.view.getInfoBar().getPos().setText("Current X/Y : " + this.model.getCurrentObj().getPos().getX() + " / " + this.model.getCurrentObj().getPos().getY() + " ");
+		}
 		this.view.repaint();
 	}
 	
