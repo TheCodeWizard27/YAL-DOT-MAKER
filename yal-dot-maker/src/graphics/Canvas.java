@@ -1,6 +1,7 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,6 +17,7 @@ import GUI.Map;
 import core.Model;
 import map.Asset;
 import map.Deathbox;
+import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
@@ -27,11 +29,12 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		super();
 		this.model = model;
 		
+		this.setFocusable(true);
 		this.scrollBar = new JScrollPane(this);
 		this.scrollBar.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		this.addMouseListener(this);
-		
+		this.addMouseMotionListener(this);
 		this.setPreferredSize(new Dimension((int)this.model.getMap().getSize().getX(),(int)this.model.getMap().getSize().getY()));
 	}
 	
@@ -60,6 +63,8 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			tg2d.drawImage(asset.getSprite(), (int)asset.getPos().getX(), (int)asset.getPos().getY(), null);
 		}
 		
+		tg2d.drawImage(map.getPlayer().getSprite(),(int)map.getPlayer().getPos().getX(),(int)map.getPlayer().getPos().getY(),null);
+		
 		if(this.model.isHighlightHitbox()) {
 			for(Hitbox hitbox : map.getHitboxes()) {
 				tg2d.setColor(new Color(255,0,255));
@@ -73,6 +78,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 				tg2d.setColor(new Color(255,0,0));
 				tg2d.drawRect((int)deathbox.getPos().getX(), (int)deathbox.getPos().getY(), (int)deathbox.getSize().getX(), (int)deathbox.getSize().getY());
 			}
+			tg2d.setColor(new Color(50,50,150));
+			tg2d.drawRect((int)map.getCamera().getPos().getX(), (int)map.getCamera().getPos().getY(), 
+					(int)map.getCamera().getSize().getX(), (int)map.getCamera().getSize().getY());
 		}
 		
 		//end drawing
@@ -85,9 +93,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		this.requestFocus();
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
@@ -102,14 +108,33 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 	public void mouseReleased(MouseEvent e) {}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseDragged(MouseEvent e) {
+		float zoom = this.model.getZoom()/100;
+		float displayX = (this.getWidth()/2)-((this.model.getMap().getSize().getX()*zoom)/2);
+		float displayY = (this.getHeight()/2)-((this.model.getMap().getSize().getY()*zoom)/2);
+		
+		ElementTemplate tempEle = this.model.getCurrentObj();
+		float newX = e.getX() - displayX;
+		float newY = e.getY() - displayY;
+		
+		tempEle.setPos(new Vector2f(newX - (tempEle.getSize().getX()*zoom)/2,newY - (tempEle.getSize().getY()*zoom)/2));
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent e) {
+		this.requestFocus();
+		if(this.model.getCurrentObj() != null) {
+			
+			float zoom = this.model.getZoom()/100;
+			float objX = this.model.getCurrentObj().getPos().getX() + (this.getWidth()/2)-((this.model.getMap().getSize().getX()*zoom)/2);
+			float objY = this.model.getCurrentObj().getPos().getY() + (this.getHeight()/2)-((this.model.getMap().getSize().getY()*zoom)/2);
+			if(e.getX() >= objX && e.getX() <= objX + this.model.getCurrentObj().getSize().getX()*zoom &&
+					e.getY() >= objY && e.getY() <= objY + this.model.getCurrentObj().getSize().getY()*zoom) {
+				this.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+			}else {
+				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		}
 	}
 }
