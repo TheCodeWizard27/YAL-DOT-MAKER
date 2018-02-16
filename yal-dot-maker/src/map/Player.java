@@ -30,4 +30,8 @@ public class Player extends ElementTemplate{
 		this.sprite = tempImg;
 		this.size = new Vector2f(size);
 	}
+	
+	public BufferedImage getSprite() {
+		return this.sprite;
+	}
 }
