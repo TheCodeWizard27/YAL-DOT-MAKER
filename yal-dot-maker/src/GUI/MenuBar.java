@@ -23,7 +23,7 @@ public class MenuBar {
 		
 		int i = 0;
 		for(Menu menuItem : Menu.values()) {
-			this.menuItems[i] = new MenuItem(menuItem);
+			this.menuItems[i] = new MenuItem(menuItem,model);
 			this.menuDrop.add(this.menuItems[i]);
 			i++;
 		}
