@@ -109,16 +109,17 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		float zoom = this.model.getZoom()/100;
-		float displayX = (this.getWidth()/2)-((this.model.getMap().getSize().getX()*zoom)/2);
-		float displayY = (this.getHeight()/2)-((this.model.getMap().getSize().getY()*zoom)/2);
-		
-		ElementTemplate tempEle = this.model.getCurrentObj();
-		float newX = e.getX() - displayX;
-		float newY = e.getY() - displayY;
-		
-		tempEle.setPos(new Vector2f(newX - (tempEle.getSize().getX()*zoom)/2,newY - (tempEle.getSize().getY()*zoom)/2));
-		
+		if(this.model.getCurrentObj() != null) {
+			float zoom = this.model.getZoom()/100;
+			float displayX = (this.getWidth()/2)-((this.model.getMap().getSize().getX()*zoom)/2);
+			float displayY = (this.getHeight()/2)-((this.model.getMap().getSize().getY()*zoom)/2);
+			
+			ElementTemplate tempEle = this.model.getCurrentObj();
+			float newX = e.getX() - displayX;
+			float newY = e.getY() - displayY;
+			
+			tempEle.setPos(new Vector2f(newX - (tempEle.getSize().getX()*zoom)/2,newY - (tempEle.getSize().getY()*zoom)/2));
+		}
 	}
 
 	@Override
