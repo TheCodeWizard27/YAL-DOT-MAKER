@@ -19,6 +19,7 @@ public class Player extends ElementTemplate{
 		} catch (IOException e) {
 			//add error
 		}
+		this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 	}
 	
 	public void setSize(Vector2f size) {

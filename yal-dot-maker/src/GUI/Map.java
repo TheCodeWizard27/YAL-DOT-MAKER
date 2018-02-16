@@ -12,11 +12,11 @@ import map.Hitbox;
 import map.Player;
 
 public class Map {
-	private Player player = new Player(new Vector2f(0,0),new Vector2f(0,0));
+	private Player player = new Player(new Vector2f(0,0),new Vector2f(38,64));
 	private String name;
 	private Vector2f size;
 	private ArrayList<EndBox> endBox = new ArrayList<EndBox>();
-	private Camera camera = new Camera(new Vector2f(0,0),new Vector2f(0,0));
+	private Camera camera = new Camera(new Vector2f(0,0),new Vector2f(450,300));
 	private ArrayList<Asset> assets = new ArrayList<Asset>();
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private ArrayList<Deathbox> deathboxes = new ArrayList<Deathbox>();

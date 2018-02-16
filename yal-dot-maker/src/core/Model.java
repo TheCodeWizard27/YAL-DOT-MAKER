@@ -1,6 +1,7 @@
 package core;
 
 import GUI.Map;
+import graphics.Vector2f;
 import map.ElementTemplate;
 
 public class Model {
@@ -9,6 +10,7 @@ public class Model {
 	private float zoom = 100;
 	private boolean ctrl = false;
 	private ElementTemplate currentObj;
+	private Vector2f setPos;
 	
 	public Model() {
 		this.map = new Map();
