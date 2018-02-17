@@ -90,6 +90,7 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 					break;
 				}
 				this.view.getObjectList().update();
+				this.view.getObjectList().getList().setSelectedValue(object.getName(),true);
 			}
 	}
 

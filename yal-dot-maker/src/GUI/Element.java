@@ -88,27 +88,28 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 			float imgY = (canvas.getHeight()/2)-((map.getSize().getY()*zoom)/2);
 			double mouseX = canvas.getMousePosition().getX();
 			double mouseY = canvas.getMousePosition().getY();
+			String tempName = "";
 			
 			if(mouseX >= imgX && mouseX <= imgX + map.getSize().getX()*zoom &&
 					mouseY >= imgY && mouseY <= imgY + map.getSize().getY()*zoom) {
 				switch(this.type) {
 				case HITBOX:
-					String name = "Hitbox" + map.getHitboxes().size();
-					Hitbox tempObj = new Hitbox(name, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					tempName = "Hitbox" + map.getHitboxes().size();
+					Hitbox tempObj = new Hitbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					this.model.getMap().getHitboxes().add(tempObj);
 					break;
 				case DEATHBOX:
-					String name1 = "Deathbox" + map.getDeathboxes().size();
-					Deathbox tempObj1 = new Deathbox(name1, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					tempName = "Deathbox" + map.getDeathboxes().size();
+					Deathbox tempObj1 = new Deathbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					this.model.getMap().getDeathboxes().add(tempObj1);
 					break;
 				case GOALBOX:
-					String name2 = "Goalbox" + map.getEndBox().size();
-					EndBox tempObj2 = new EndBox(name2, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					tempName = "Goalbox" + map.getEndBox().size();
+					EndBox tempObj2 = new EndBox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					this.model.getMap().getEndBox().add(tempObj2);
 					break;
 				case ASSET:
-					String name3 = "Asset" + map.getAssets().size();
+					tempName = "Asset" + map.getAssets().size();
 					BufferedImage tempSprite;
 					Asset tempObj3;
 					
@@ -120,9 +121,9 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 								tempSprite.setRGB(x, y, new Color(150,150,100).getRGB());
 							}
 						}
-						tempObj3 = new Asset(tempSprite, name3, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+						tempObj3 = new Asset(tempSprite, tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
 					}else {
-						tempObj3 = new Asset(this.sprite,name3, new Vector2f((float)((mouseX-imgX-((this.sprite.getWidth()*zoom)/2))),(float)(mouseY-imgY-((this.sprite.getHeight()*zoom)/2)))
+						tempObj3 = new Asset(this.sprite,tempName, new Vector2f((float)((mouseX-imgX-((this.sprite.getWidth()*zoom)/2))),(float)(mouseY-imgY-((this.sprite.getHeight()*zoom)/2)))
 								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()));
 					}
 					
@@ -132,6 +133,7 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 			}
 			
 			this.view.getObjectList().update();
+			this.view.getObjectList().getList().setSelectedValue(tempName, true);
 		}
 	}
 	@Override

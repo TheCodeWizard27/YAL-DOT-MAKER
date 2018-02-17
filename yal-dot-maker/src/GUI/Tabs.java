@@ -26,8 +26,8 @@ public class Tabs{
 		this.tabs = new JTabbedPane();
 		this.tabs.setPreferredSize(new Dimension(350,400));
 		
-		this.addMapSettings(model);
-		this.addObjectExplorer(view, model);
+		this.addMapSettings();
+		this.addObjectExplorer();
 		this.addObjectSettings();
 		
 		this.tabs.add("Map Settings", this.mapSettingsTab);
@@ -39,7 +39,7 @@ public class Tabs{
 		return this.tabs;
 	}
 	
-	public void addMapSettings(Model model) {
+	public void addMapSettings() {
 		this.mapSettingsTab = new JPanel();
 		
 		for(MapProperty property : MapProperty.values()) {
@@ -57,14 +57,14 @@ public class Tabs{
 				break;
 			}
 			tempContainer.add(label);
-			tempContainer.add(new InputField(model.getMap(),property));
+			tempContainer.add(new InputField(this.model.getMap(),property));
 			this.mapSettingsTab.add(tempContainer);
 		}
 	}
 
 	
-	public void addObjectExplorer(View view, Model model) {
-		this.objectExplorerTab = new ObjectExplorer(view, model);
+	public void addObjectExplorer() {
+		this.objectExplorerTab = new ObjectExplorer(this.view, this.model);
 		
 	}
 	
