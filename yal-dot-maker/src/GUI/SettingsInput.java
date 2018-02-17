@@ -45,6 +45,7 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 		}
 		
 		this.setPreferredSize(new Dimension(200,20));
+		this.setMaximumSize(new Dimension(200,20));
 		this.addKeyListener(this);
 		this.addFocusListener(this);
 	}

@@ -20,7 +20,7 @@ public class Map {
 	private ArrayList<Asset> assets = new ArrayList<Asset>();
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private ArrayList<Deathbox> deathboxes = new ArrayList<Deathbox>();
-	private BufferedImage backgroundImage;
+	private BufferedImage backgroundImage = new BufferedImage(450,300,BufferedImage.TYPE_INT_ARGB);
 	
 	public Map() {
 		this.name = "Costum Map";

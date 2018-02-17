@@ -29,6 +29,7 @@ public class InputField extends JFormattedTextField implements PropertyChangeLis
 		}
 		
 		this.setPreferredSize(new Dimension(200,20));
+		this.setMaximumSize(new Dimension(200,20));
 		this.map = map;
 		this.property = property;
 		

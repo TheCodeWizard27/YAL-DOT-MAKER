@@ -1,16 +1,19 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JButton;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
 
 import constants.MapProperty;
 import constants.ObjectProperty;
 import core.Model;
 import core.View;
+import map.Asset;
 
 public class Tabs{
 	private Model model;
@@ -41,6 +44,10 @@ public class Tabs{
 	
 	public void addMapSettings() {
 		this.mapSettingsTab = new JPanel();
+		this.mapSettingsTab.setLayout(new BorderLayout());
+		this.mapSettingsTab.setBorder(new EmptyBorder(5,5,5,5));
+		
+		Box container = Box.createVerticalBox();
 		
 		for(MapProperty property : MapProperty.values()) {
 			JPanel tempContainer = new JPanel();
@@ -56,10 +63,17 @@ public class Tabs{
 				label.setText("Map height : ");
 				break;
 			}
-			tempContainer.add(label);
-			tempContainer.add(new InputField(this.model.getMap(),property));
-			this.mapSettingsTab.add(tempContainer);
+			tempContainer.setLayout(new BorderLayout());
+			tempContainer.add(label,BorderLayout.WEST);
+			tempContainer.add(new InputField(this.model.getMap(),property),BorderLayout.EAST);
+			tempContainer.setMaximumSize(new Dimension(450,20));
+			container.add(tempContainer);
 		}
+		
+		container.add(new BackgroundImageBtn(this.model.getMap().getBackgroundImage()));
+		container.add(new ColorChooserBtn(this.model.getMap().getBackgroundImage()));
+		
+		this.mapSettingsTab.add(container, BorderLayout.WEST);
 	}
 
 	
@@ -73,19 +87,31 @@ public class Tabs{
 			this.tabs.remove(this.objectSettingsTab);
 		
 		this.objectSettingsTab = new JPanel();
+		this.objectSettingsTab.setLayout(new BorderLayout());
+		this.objectSettingsTab.setBorder(new EmptyBorder(5,5,5,5));
+		
+		Box container = Box.createVerticalBox();
 		
 		if(this.model.getCurrentObj() != null) {
+			
 			for(ObjectProperty property : ObjectProperty.values()) {
 				JPanel tempContainer = new JPanel();
 				JLabel label = new JLabel();
 				label.setText(property.toString().toLowerCase() + " : ");
 				
-				tempContainer.add(label);
-				tempContainer.add(new SettingsInput(this.view, this.model,property));
-				this.objectSettingsTab.add(tempContainer);
+				tempContainer.setLayout(new BorderLayout());
+				tempContainer.setMaximumSize(new Dimension(450,20));
+				tempContainer.add(label, BorderLayout.WEST);
+				tempContainer.add(new SettingsInput(this.view, this.model,property),BorderLayout.EAST);
+				container.add(tempContainer);
+			}
+			if(this.model.getCurrentObj() instanceof Asset) {
+				Asset currObj = (Asset) this.model.getCurrentObj();
+				container.add(new ColorChooserBtn(currObj.getSprite()));
 			}
 		}
 		
+		this.objectSettingsTab.add(container, BorderLayout.WEST);
 		this.tabs.add("Object Settings",this.objectSettingsTab);
 
 		if(this.tabs.getTabCount() > 2)
