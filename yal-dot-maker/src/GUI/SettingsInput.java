@@ -99,7 +99,6 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 	@Override
 	public void focusLost(FocusEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("still doin it");
 		this.update();
 	}
 
@@ -107,7 +106,6 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("still doin it");
 		if(e.getKeyCode() == KeyEvent.VK_ENTER)
 			this.update();
 	}
