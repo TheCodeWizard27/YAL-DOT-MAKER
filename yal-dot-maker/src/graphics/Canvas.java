@@ -93,21 +93,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(this.model.getCurrentObj() != null) {
 			float zoom = this.model.getZoom()/100;
@@ -138,4 +123,20 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			}
 		}
 	}
+	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 }
