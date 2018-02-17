@@ -30,11 +30,12 @@ public class Asset extends ElementTemplate{
 	}
 	
 	public void setSize(Vector2f size) {
-		BufferedImage tempImg = new BufferedImage((int)this.size.getX(),(int)this.size.getY(),BufferedImage.TYPE_INT_ARGB);
+		BufferedImage tempImg = new BufferedImage((int)size.getX(),(int)size.getY(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D tempG2d = (Graphics2D) tempImg.getGraphics();
 		
-		tempG2d.scale(this.size.getX()/size.getX(), this.size.getY()/size.getY());
+		tempG2d.scale(size.getX()/this.size.getX(), size.getY()/this.size.getY());
 		tempG2d.drawImage(this.sprite,0,0,null);
+		this.sprite = tempImg;
 		this.size.setVector2f(size);
 	}
 
