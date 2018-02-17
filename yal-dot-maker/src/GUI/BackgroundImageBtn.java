@@ -3,7 +3,6 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,16 +10,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
+import core.Model;
+
 public class BackgroundImageBtn extends JButton implements ActionListener{
 
-	BufferedImage image;
+	Model model;
 	JFileChooser jfc = new JFileChooser();
 	
-	public BackgroundImageBtn(BufferedImage image) {
-		super("background image");
+	public BackgroundImageBtn(Model model) {
+		super("set background image");
+		this.model = model;
 		this.setMaximumSize(new Dimension(200,20));
 		this.addActionListener(this);
-		this.image = image;
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class BackgroundImageBtn extends JButton implements ActionListener{
 			File tempFile = this.jfc.getSelectedFile();
 			
 			try {
-				this.image = ImageIO.read(new File(tempFile.getPath()));
+				this.model.getMap().setBackgroundImage(ImageIO.read(new File(tempFile.getPath())));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

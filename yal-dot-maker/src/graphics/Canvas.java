@@ -58,6 +58,13 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		tg2d.scale(zoom, zoom);	
 		
 		//drawing
+
+		BufferedImage tempBackground = new BufferedImage(map.getBackgroundImage().getWidth(),map.getBackgroundImage().getHeight(),BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tempG2d = (Graphics2D) tempBackground.getGraphics();
+		tempG2d.scale(map.getCamera().getSize().getX()/(float)tempBackground.getWidth(), map.getCamera().getSize().getY()/(float)tempBackground.getHeight());
+		tempG2d.drawImage(map.getBackgroundImage(),0,0,null);
+		
+		tg2d.drawImage(tempBackground, (int)map.getCamera().getPos().getX(), (int)map.getCamera().getPos().getY(),null);
 		
 		for(Asset asset : map.getAssets()) {
 			tg2d.drawImage(asset.getSprite(), (int)asset.getPos().getX(), (int)asset.getPos().getY(), null);
@@ -79,6 +86,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 				tg2d.drawRect((int)deathbox.getPos().getX(), (int)deathbox.getPos().getY(), (int)deathbox.getSize().getX(), (int)deathbox.getSize().getY());
 			}
 			tg2d.setColor(new Color(50,50,150));
+			
 			tg2d.drawRect((int)map.getCamera().getPos().getX(), (int)map.getCamera().getPos().getY(), 
 					(int)map.getCamera().getSize().getX(), (int)map.getCamera().getSize().getY());
 		}

@@ -70,8 +70,11 @@ public class Tabs{
 			container.add(tempContainer);
 		}
 		
-		container.add(new BackgroundImageBtn(this.model.getMap().getBackgroundImage()));
-		container.add(new ColorChooserBtn(this.model.getMap().getBackgroundImage()));
+		ColorChooserBtn tempBtn = new ColorChooserBtn(this.model.getMap().getBackgroundImage());
+		tempBtn.setText("set background color");
+		
+		container.add(new BackgroundImageBtn(this.model));
+		container.add(tempBtn);
 		
 		this.mapSettingsTab.add(container, BorderLayout.WEST);
 	}
