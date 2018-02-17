@@ -23,9 +23,9 @@ public class Player extends ElementTemplate{
 	}
 	
 	public void setSize(Vector2f size) {
-		BufferedImage tempImg = new BufferedImage(this.sprite.getWidth(),this.sprite.getHeight(),BufferedImage.TYPE_INT_ARGB);
+		BufferedImage tempImg = new BufferedImage((int)size.getX(),(int)size.getY(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
-		g2d.scale(this.sprite.getWidth()/size.getX(), this.sprite.getHeight()/size.getY());
+		g2d.scale(size.getX()/this.sprite.getWidth(), size.getY()/this.sprite.getHeight());
 		g2d.drawImage(this.sprite, 0, 0, null);
 		
 		this.sprite = tempImg;
