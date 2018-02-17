@@ -69,7 +69,9 @@ public class Tabs{
 	}
 	
 	public void addObjectSettings() {
-		this.tabs.remove(this.objectSettingsTab);
+		if(this.objectSettingsTab != null)
+			this.tabs.remove(this.objectSettingsTab);
+		
 		this.objectSettingsTab = new JPanel();
 		
 		if(this.model.getCurrentObj() != null) {
