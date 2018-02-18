@@ -66,7 +66,9 @@ public class ObjectListBtn extends JButton implements ActionListener{
 			}else {
 				
 			}
-			
+			this.view.getObjectList().getList().clearSelection();
+			this.model.setCurrentObj(null);
+			this.view.getTabs().addObjectSettings();
 			break;
 		}
 		
