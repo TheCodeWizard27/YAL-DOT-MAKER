@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -12,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -21,6 +23,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import constants.Menu;
 import core.Model;
@@ -116,10 +120,10 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					cameraWidth.appendChild(file.createTextNode(String.valueOf(map.getCamera().getSize().getX())));
 					cameraHeight.appendChild(file.createTextNode(String.valueOf(map.getCamera().getSize().getY())));
 					
-					cameraEle.appendChild(playerPosX);
-					cameraEle.appendChild(playerPosY);
-					cameraEle.appendChild(playerWidth);
-					cameraEle.appendChild(playerHeight);
+					cameraEle.appendChild(cameraPosX);
+					cameraEle.appendChild(cameraPosY);
+					cameraEle.appendChild(cameraWidth);
+					cameraEle.appendChild(cameraHeight);
 					
 					container.appendChild(cameraEle);
 					
@@ -166,7 +170,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 					for(Deathbox deathbox : map.getDeathboxes()) {
-						Element deathboxEle = file.createElement("endbox");
+						Element deathboxEle = file.createElement("deathbox");
 						Element deathboxPosX = file.createElement("posX");
 						Element deathboxPosY = file.createElement("posY");
 						Element deathboxWidth = file.createElement("width");
@@ -187,7 +191,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 					for(Asset asset : map.getAssets()) {
-						Element assetEle = file.createElement("endbox");
+						Element assetEle = file.createElement("asset");
 						Element assetPosX = file.createElement("posX");
 						Element assetPosY = file.createElement("posY");
 						Element assetWidth = file.createElement("width");
@@ -219,7 +223,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					
 					Transformer transformer = TransformerFactory.newInstance().newTransformer();
 					new File(tempDir.getAbsolutePath() + "\\" + map.getName()).mkdirs();
-					Result output = new StreamResult(new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\output.xml"));
+					Result output = new StreamResult(new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\mapData.xml"));
 					Source input = new DOMSource(file);
 					
 					transformer.transform(input, output);
@@ -238,6 +242,33 @@ public class MenuItem extends JMenuItem implements ActionListener{
 			this.model.setCurrentObj(null);
 			this.model.setZoom(100);
 			this.view.resetGUI();
+			
+			break;
+		case LOAD:
+			int loadVal = this.jfc.showOpenDialog(this);
+			Map map = this.model.getMap();
+			
+			if(loadVal == JFileChooser.APPROVE_OPTION) {
+				try {
+					this.model.setMap(new Map());
+					this.model.setCurrentObj(null);
+					this.model.setZoom(100);
+					
+					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+					Document file = dBuilder.parse(new File(this.jfc.getSelectedFile().getAbsolutePath() + "\\mapData.xml"));
+					file.getDocumentElement().normalize();
+					
+					//getting map data
+					Element mapEle = (Element) file.getElementsByTagName("map").item(0);
+					map.setName(mapEle.getElementsByTagName("name").item(0).getTextContent());
+					
+					this.view.resetGUI();
+				} catch (ParserConfigurationException | SAXException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			
 			break;
 		}

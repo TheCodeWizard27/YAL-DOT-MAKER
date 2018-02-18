@@ -56,13 +56,9 @@ public class View extends JFrame{
 		this.objectList = new ObjectList(model, this);
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.infoBar = new InfoBar();
-		this.canvas = new Canvas(model, this);
 		this.menu = new MenuBar(model,this);
-		this.model = model;
 		this.container = new JPanel();
 		
-		this.setSize(1200,800);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(this.menu.getMenuBar());
 		
 		this.container.setLayout(new BorderLayout());
@@ -72,8 +68,8 @@ public class View extends JFrame{
 		this.west.setDividerLocation(520);
 		this.add(this.container);
 		
+		this.objectList.update();
 		this.revalidate();
-		this.setVisible(true);
 	}
 	
 	public static View getInstance(Model model) {
