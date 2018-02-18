@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 
 import constants.Menu;
 import core.Model;
+import core.View;
 
 public class MenuBar {
 	private JMenuBar menuBar;
@@ -15,7 +16,7 @@ public class MenuBar {
 	private JLabel hitboxLabel;
 	private HitboxCheck hitboxCheckBox;
 	
-	public MenuBar(Model model) {
+	public MenuBar(Model model, View view) {
 		this.menuBar = new JMenuBar();
 		this.menuDrop = new JMenu("File");
 		this.hitboxLabel = new JLabel("Toggle Hitbox");
@@ -23,7 +24,7 @@ public class MenuBar {
 		
 		int i = 0;
 		for(Menu menuItem : Menu.values()) {
-			this.menuItems[i] = new MenuItem(menuItem,model);
+			this.menuItems[i] = new MenuItem(menuItem,model, view);
 			this.menuDrop.add(this.menuItems[i]);
 			i++;
 		}

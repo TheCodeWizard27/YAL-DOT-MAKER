@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
 
 import constants.Menu;
 import core.Model;
+import core.View;
 import map.Asset;
 import map.Deathbox;
 import map.EndBox;
@@ -32,14 +33,16 @@ import map.Hitbox;
 public class MenuItem extends JMenuItem implements ActionListener{
 	private Menu type;
 	private Model model;
+	private View view;
 	private JFileChooser jfc = new JFileChooser();
 	
-	public MenuItem(Menu type, Model model) {
+	public MenuItem(Menu type, Model model,View view) {
 		super(type.toString().toLowerCase());
 		this.addActionListener(this);
 		this.jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		this.type = type;
 		this.model = model;
+		this.view = view;
 	}
 	
 	@Override
@@ -229,6 +232,13 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					except.printStackTrace();
 				}
 			}
+			break;
+		case NEW:
+			this.model.setMap(new Map());
+			this.model.setCurrentObj(null);
+			this.model.setZoom(100);
+			this.view.resetGUI();
+			
 			break;
 		}
 	}
