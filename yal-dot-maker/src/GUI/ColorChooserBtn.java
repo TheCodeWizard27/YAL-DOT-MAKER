@@ -24,9 +24,11 @@ public class ColorChooserBtn extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Color tempColor = JColorChooser.showDialog(this, "Set color of Element.", new Color(this.image.getRGB(0, 0)));
 		
-		for(int y = 0; y < this.image.getHeight();y++) {
-			for(int x = 0; x < this.image.getWidth();x++) {
-				this.image.setRGB(x, y, tempColor.getRGB());
+		if(tempColor != null) {
+			for(int y = 0; y < this.image.getHeight();y++) {
+				for(int x = 0; x < this.image.getWidth();x++) {
+					this.image.setRGB(x, y, tempColor.getRGB());
+				}
 			}
 		}
 	}
