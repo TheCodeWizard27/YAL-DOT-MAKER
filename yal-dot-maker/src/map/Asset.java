@@ -26,9 +26,9 @@ public class Asset extends ElementTemplate{
 		Graphics2D g2d = (Graphics2D) spriteCopy.getGraphics();
 		
 		g2d.scale(spriteCopy.getWidth()/size.getX(), spriteCopy.getHeight()/size.getY());
-		g2d.drawImage(this.sprite,0,0,null);
+		g2d.drawImage(asset.getSprite(),0,0,null);
 		
-		this.sprite = asset.getSprite();
+		this.sprite = spriteCopy;
 	}
 	
 	public void setSize(Vector2f size) {
