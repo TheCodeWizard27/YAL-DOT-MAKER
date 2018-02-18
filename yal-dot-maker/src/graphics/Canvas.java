@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 
 import GUI.Map;
 import core.Model;
+import core.View;
 import map.Asset;
 import map.Deathbox;
 import map.ElementTemplate;
@@ -23,11 +24,13 @@ import map.Hitbox;
 
 public class Canvas extends JPanel implements MouseListener, MouseMotionListener{
 	private Model model;
+	private View view;
 	private JScrollPane scrollBar;
 	
-	public Canvas(Model model) {
+	public Canvas(Model model, View view) {
 		super();
 		this.model = model;
+		this.view = view;
 		
 		this.setFocusable(true);
 		this.scrollBar = new JScrollPane(this);
@@ -112,6 +115,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			float newY = e.getY() - displayY;
 			
 			tempEle.setPos(new Vector2f(newX - (tempEle.getSize().getX()*zoom)/2,newY - (tempEle.getSize().getY()*zoom)/2));
+			this.view.getTabs().addObjectSettings();
 		}
 	}
 

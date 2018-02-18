@@ -30,7 +30,7 @@ public class View extends JFrame{
 		this.objectList = new ObjectList(model, this);
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.infoBar = new InfoBar();
-		this.canvas = new Canvas(model);
+		this.canvas = new Canvas(model, this);
 		this.menu = new MenuBar(model);
 		this.model = model;
 		this.container = new JPanel();
