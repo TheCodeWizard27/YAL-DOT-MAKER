@@ -19,6 +19,7 @@ import graphics.Canvas;
 import graphics.Vector2f;
 import map.Asset;
 import map.Deathbox;
+import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
@@ -88,6 +89,7 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 			float imgY = (canvas.getHeight()/2)-((map.getSize().getY()*zoom)/2);
 			double mouseX = canvas.getMousePosition().getX();
 			double mouseY = canvas.getMousePosition().getY();
+			ElementTemplate tempObj;
 			String tempName = "";
 			
 			if(mouseX >= imgX && mouseX <= imgX + map.getSize().getX()*zoom &&
@@ -95,23 +97,22 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 				switch(this.type) {
 				case HITBOX:
 					tempName = "Hitbox" + map.getHitboxes().size();
-					Hitbox tempObj = new Hitbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
-					this.model.getMap().getHitboxes().add(tempObj);
+					tempObj = new Hitbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					this.model.getMap().getHitboxes().add((Hitbox) tempObj);
 					break;
 				case DEATHBOX:
 					tempName = "Deathbox" + map.getDeathboxes().size();
-					Deathbox tempObj1 = new Deathbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
-					this.model.getMap().getDeathboxes().add(tempObj1);
+					tempObj = new Deathbox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					this.model.getMap().getDeathboxes().add((Deathbox) tempObj);
 					break;
 				case GOALBOX:
 					tempName = "Goalbox" + map.getEndBox().size();
-					EndBox tempObj2 = new EndBox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
-					this.model.getMap().getEndBox().add(tempObj2);
+					tempObj = new EndBox(tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+					this.model.getMap().getEndBox().add((EndBox) tempObj);
 					break;
 				case ASSET:
 					tempName = "Asset" + map.getAssets().size();
 					BufferedImage tempSprite;
-					Asset tempObj3;
 					
 					if(this.sprite == null) {
 						tempSprite = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
@@ -121,19 +122,22 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 								tempSprite.setRGB(x, y, new Color(150,150,100).getRGB());
 							}
 						}
-						tempObj3 = new Asset(tempSprite, tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100));
+						tempObj = new Asset(tempSprite, tempName, new Vector2f((float)(mouseX-imgX-(50*zoom)),(float)(mouseY-imgY-(50*zoom))), new Vector2f(100,100),null);
 					}else {
-						tempObj3 = new Asset(this.sprite,tempName, new Vector2f((float)((mouseX-imgX-((this.sprite.getWidth()*zoom)/2))),(float)(mouseY-imgY-((this.sprite.getHeight()*zoom)/2)))
-								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()));
+						tempObj = new Asset(this.sprite,tempName, new Vector2f((float)((mouseX-imgX-((this.sprite.getWidth()*zoom)/2))),(float)(mouseY-imgY-((this.sprite.getHeight()*zoom)/2)))
+								, new Vector2f(this.sprite.getWidth(),this.sprite.getHeight()),this.getText());
 					}
 					
-					this.model.getMap().getAssets().add(tempObj3);
+					this.model.getMap().getAssets().add((Asset) tempObj);
 					break;
+				default:
+					tempObj = new Hitbox("Error",new Vector2f(0,0),new Vector2f(0,0));	
 				}
+				
+				this.model.setCurrentObj(tempObj);
+				this.view.getObjectList().update();
+				this.view.getObjectList().getList().setSelectedValue(tempName, true);
 			}
-			
-			this.view.getObjectList().update();
-			this.view.getObjectList().getList().setSelectedValue(tempName, true);
 		}
 	}
 	@Override

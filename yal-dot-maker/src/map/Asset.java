@@ -7,10 +7,12 @@ import graphics.Vector2f;
 
 public class Asset extends ElementTemplate{
 	private BufferedImage sprite;
+	private String spriteName;
 	
-	public Asset(BufferedImage sprite, String name, Vector2f pos, Vector2f size) {
+	public Asset(BufferedImage sprite, String name, Vector2f pos, Vector2f size, String spriteName) {
 		super(name,pos,size);
 		this.sprite = sprite;
+		this.spriteName = spriteName;
 	}
 	
 	public Asset(String name, BufferedImage sprite, Vector2f pos) {
@@ -44,5 +46,13 @@ public class Asset extends ElementTemplate{
 	}
 	public void setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
+	}
+
+	public String getSpriteName() {
+		return spriteName;
+	}
+
+	public void setSpriteName(String spriteName) {
+		this.spriteName = spriteName;
 	}
 }
