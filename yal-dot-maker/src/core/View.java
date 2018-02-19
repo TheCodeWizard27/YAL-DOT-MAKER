@@ -51,12 +51,11 @@ public class View extends JFrame{
 	public void resetGUI() {
 		
 		this.getContentPane().removeAll();
-		
-		this.tabs = new Tabs(model,this);
+		this.tabs = new Tabs(this.model,this);
 		this.objectList = new ObjectList(model, this);
 		this.west = new JSplitPane(JSplitPane.VERTICAL_SPLIT,this.tabs.getTabBar(),this.objectList.getObjectList());
 		this.infoBar = new InfoBar();
-		this.menu = new MenuBar(model,this);
+		this.menu = new MenuBar(this.model,this);
 		this.container = new JPanel();
 		
 		this.setJMenuBar(this.menu.getMenuBar());
@@ -70,6 +69,7 @@ public class View extends JFrame{
 		
 		this.objectList.update();
 		this.revalidate();
+		this.setVisible(true);
 	}
 	
 	public static View getInstance(Model model) {

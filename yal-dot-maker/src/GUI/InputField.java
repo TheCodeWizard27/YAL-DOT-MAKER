@@ -15,24 +15,23 @@ public class InputField extends JFormattedTextField implements PropertyChangeLis
 	
 	public InputField(Map map, MapProperty property) {
 		super();
+		this.map = map;
+		this.property = property;
 		
 		switch(property) {
 		case NAME:
-			this.setValue("Custom Map");
+			this.setValue(map.getName());
 			break;
 		case WIDTH:
-			this.setValue(new Float(500));
+			this.setValue(map.getSize().getX());
 			break;
 		case HEIGHT:
-			this.setValue(new Float(500));
+			this.setValue(map.getSize().getY());
 			break;
 		}
 		
 		this.setPreferredSize(new Dimension(200,20));
-		this.setMaximumSize(new Dimension(200,20));
-		this.map = map;
-		this.property = property;
-		
+		this.setMaximumSize(new Dimension(200,20));		
 		this.addPropertyChangeListener(this);
 	}
 	

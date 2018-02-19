@@ -24,11 +24,13 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import constants.Menu;
 import core.Model;
 import core.View;
+import graphics.Vector2f;
 import map.Asset;
 import map.Deathbox;
 import map.EndBox;
@@ -246,11 +248,11 @@ public class MenuItem extends JMenuItem implements ActionListener{
 			break;
 		case LOAD:
 			int loadVal = this.jfc.showOpenDialog(this);
-			Map map = this.model.getMap();
+			Map map = new Map();
 			
 			if(loadVal == JFileChooser.APPROVE_OPTION) {
 				try {
-					this.model.setMap(new Map());
+					this.model.setMap(map);
 					this.model.setCurrentObj(null);
 					this.model.setZoom(100);
 					
@@ -262,6 +264,92 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					//getting map data
 					Element mapEle = (Element) file.getElementsByTagName("map").item(0);
 					map.setName(mapEle.getElementsByTagName("name").item(0).getTextContent());
+					Vector2f mapSize = new Vector2f(Float.parseFloat(mapEle.getElementsByTagName("width").item(0).getTextContent()),
+													Float.parseFloat(mapEle.getElementsByTagName("height").item(0).getTextContent()));
+					map.getSize().setVector2f(mapSize);
+					
+					BufferedImage tempBackground = ImageIO.read(new File(this.jfc.getSelectedFile().getAbsolutePath() + "\\bgImage.png"));
+					map.setBackgroundImage(tempBackground);
+					
+					//getting player data
+					Element playerEle = (Element) file.getElementsByTagName("player").item(0);
+					Vector2f playerPos = new Vector2f(Float.parseFloat(playerEle.getElementsByTagName("posX").item(0).getTextContent()),
+													  Float.parseFloat(playerEle.getElementsByTagName("posY").item(0).getTextContent()));
+					Vector2f playerSize = new Vector2f(Float.parseFloat(playerEle.getElementsByTagName("width").item(0).getTextContent()),
+							  						   Float.parseFloat(playerEle.getElementsByTagName("height").item(0).getTextContent()));
+					map.getPlayer().setPos(playerPos);
+					map.getPlayer().setSize(playerSize);
+					
+					//getting camera data
+					Element cameraEle = (Element) file.getElementsByTagName("camera").item(0);
+					Vector2f cameraPos = new Vector2f(Float.parseFloat(cameraEle.getElementsByTagName("posX").item(0).getTextContent()),
+							  						  Float.parseFloat(cameraEle.getElementsByTagName("posY").item(0).getTextContent()));
+					Vector2f cameraSize = new Vector2f(Float.parseFloat(cameraEle.getElementsByTagName("width").item(0).getTextContent()),
+						  						       Float.parseFloat(cameraEle.getElementsByTagName("height").item(0).getTextContent()));
+					map.getCamera().setPos(cameraPos);
+					map.getCamera().setSize(cameraSize);
+					
+					NodeList hitboxNode = file.getElementsByTagName("hitbox");
+					for(int i = 0; i < hitboxNode.getLength();i++) {
+						Element hitboxEle = (Element) hitboxNode.item(i);
+						
+						Vector2f hitboxPos = new Vector2f(Float.parseFloat(hitboxEle.getElementsByTagName("posX").item(0).getTextContent()),
+														  Float.parseFloat(hitboxEle.getElementsByTagName("posY").item(0).getTextContent()));
+						Vector2f hitboxSize = new Vector2f(Float.parseFloat(hitboxEle.getElementsByTagName("width").item(0).getTextContent()),
+								  						   Float.parseFloat(hitboxEle.getElementsByTagName("height").item(0).getTextContent()));
+						Hitbox hitbox = new Hitbox(hitboxEle.getAttribute("name"),hitboxPos, hitboxSize);
+						map.getHitboxes().add(hitbox);
+					}
+					
+					NodeList endboxNode = file.getElementsByTagName("endbox");
+					for(int i = 0; i < hitboxNode.getLength();i++) {
+						Element endboxEle = (Element) hitboxNode.item(i);
+						
+						Vector2f endboxPos = new Vector2f(Float.parseFloat(endboxEle.getElementsByTagName("posX").item(0).getTextContent()),
+														  Float.parseFloat(endboxEle.getElementsByTagName("posY").item(0).getTextContent()));
+						Vector2f endboxSize = new Vector2f(Float.parseFloat(endboxEle.getElementsByTagName("width").item(0).getTextContent()),
+								  						   Float.parseFloat(endboxEle.getElementsByTagName("height").item(0).getTextContent()));
+						EndBox endbox = new EndBox(endboxEle.getAttribute("name"),endboxPos, endboxSize);
+						map.getEndBox().add(endbox);
+					}
+					
+					NodeList deathboxNode = file.getElementsByTagName("deathbox");
+					for(int i = 0; i < hitboxNode.getLength();i++) {
+						Element deathboxEle = (Element) hitboxNode.item(i);
+						
+						Vector2f deathboxPos = new Vector2f(Float.parseFloat(deathboxEle.getElementsByTagName("posX").item(0).getTextContent()),
+														  Float.parseFloat(deathboxEle.getElementsByTagName("posY").item(0).getTextContent()));
+						Vector2f deathboxSize = new Vector2f(Float.parseFloat(deathboxEle.getElementsByTagName("width").item(0).getTextContent()),
+								  						   Float.parseFloat(deathboxEle.getElementsByTagName("height").item(0).getTextContent()));
+						Deathbox deathbox = new Deathbox(deathboxEle.getAttribute("name"),deathboxPos, deathboxSize);
+						map.getDeathboxes().add(deathbox);
+					}
+					
+					NodeList assetNode = file.getElementsByTagName("asset");
+					for(int i = 0; i < assetNode.getLength();i++) {
+						Element assetEle = (Element) assetNode.item(i);
+						BufferedImage tempImg;
+						
+						Vector2f assetPos = new Vector2f(Float.parseFloat(assetEle.getElementsByTagName("posX").item(0).getTextContent()),
+								  							Float.parseFloat(assetEle.getElementsByTagName("posY").item(0).getTextContent()));
+						Vector2f assetSize = new Vector2f(Float.parseFloat(assetEle.getElementsByTagName("width").item(0).getTextContent()),
+								  						     Float.parseFloat(assetEle.getElementsByTagName("height").item(0).getTextContent()));
+						
+						if(assetEle.hasAttribute("src"))
+							tempImg = ImageIO.read(new File(this.jfc.getSelectedFile().getAbsolutePath() + "\\" + assetEle.getAttribute("src")));
+						else {
+							tempImg = new BufferedImage((int)assetSize.getX(), (int)assetSize.getY(),BufferedImage.TYPE_INT_ARGB);
+							
+							for(int y = 0; y < assetSize.getY();y++) {
+								for(int x = 0; x < assetSize.getX();x++) {
+									tempImg.setRGB(x, y, Integer.parseInt(assetEle.getAttribute("color")));
+								}
+							}
+						}
+						
+						Asset asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize, assetEle.getAttribute("src"));
+						map.getAssets().add(asset);
+					}
 					
 					this.view.resetGUI();
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
