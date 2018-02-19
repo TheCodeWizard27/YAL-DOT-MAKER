@@ -1,6 +1,7 @@
 package map;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Player {
 	
 	private BufferedImage sprite;
 	private Vector2f pos;
+	private Vector2f size;
 	private Vector2f speed;
 	private Hitbox hitbox;
 	
@@ -25,17 +27,24 @@ public class Player {
 	private boolean jumping = false;
 	private boolean inAir = false;
 	
-	public Player(Vector2f pos) {
+	public Player(Vector2f pos, Vector2f size) {
 		this.pos = pos;
 		this.speed = new Vector2f(0,0);
-		this.hitbox = new Hitbox(pos.getX(),pos.getY(),38,64);
+		this.size = new Vector2f(size);
+		this.hitbox = new Hitbox(this.pos,this.size);
 		
 		try {
-			this.sprite = ImageIO.read(new File("D:\\Users\\bschab\\Desktop\\unnamed.png"));
+			this.sprite = ImageIO.read(new File("src/textures/unnamed.png"));
+			BufferedImage tempImg = new BufferedImage((int)size.getX(),(int)size.getY(),BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
+			g2d.scale(size.getX()/this.sprite.getWidth(), size.getY()/this.sprite.getHeight());
+			g2d.drawImage(this.sprite, 0, 0, null);
+			
+			this.sprite = tempImg;
 		} catch (IOException e) {
-			BufferedImage errImg = new BufferedImage(16,32,BufferedImage.TYPE_INT_ARGB);
-			for(int y = 0; y < 32; y++) {
-				for(int x = 0; x < 16; x++) {
+			BufferedImage errImg = new BufferedImage((int)this.size.getX(),(int)this.size.getY(),BufferedImage.TYPE_INT_ARGB);
+			for(int y = 0; y < this.size.getY(); y++) {
+				for(int x = 0; x < this.size.getX(); x++) {
 					errImg.setRGB(x, y, new Color(255,0,255).getRGB());
 				}
 			}
