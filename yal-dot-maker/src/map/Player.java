@@ -16,10 +16,11 @@ public class Player extends ElementTemplate{
 		super("Player", pos,size);
 		try {
 			this.sprite = ImageIO.read(new File("src/textures/unnamed.png"));
+			this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 		} catch (IOException e) {
 			//add error
+			this.size = new Vector2f(0,0);
 		}
-		this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 	}
 	
 	public void setSize(Vector2f size) {
