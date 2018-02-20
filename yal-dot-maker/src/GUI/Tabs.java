@@ -42,6 +42,10 @@ public class Tabs{
 		return this.tabs;
 	}
 	
+	public ObjectExplorer getExplorer() {
+		return this.objectExplorerTab;
+	}
+	
 	public void addMapSettings() {
 		this.mapSettingsTab = new JPanel();
 		this.mapSettingsTab.setLayout(new BorderLayout());

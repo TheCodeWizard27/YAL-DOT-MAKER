@@ -74,7 +74,7 @@ public class TitleButton extends JButton implements ActionListener{
 													   Float.parseFloat(playerEle.getElementsByTagName("height").item(0).getTextContent()));
 					Player player = new Player(startPos,playerSize);
 					map.setPlayer(player);
-					map.setStartPos(startPos);
+					map.setStartPos(new Vector2f(startPos));
 					
 					//adding camera
 					Element cameraEle = (Element) file.getElementsByTagName("camera").item(0);

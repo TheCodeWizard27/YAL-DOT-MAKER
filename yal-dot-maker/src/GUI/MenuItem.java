@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -23,7 +24,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -60,6 +60,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 			if(returnVal == JFileChooser.APPROVE_OPTION) {
 				
 				File tempDir = this.jfc.getSelectedFile();
+
 				Map map = this.model.getMap();
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder;
@@ -352,6 +353,15 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 					this.view.resetGUI();
+					
+					File[] images = new File(this.jfc.getSelectedFile().getAbsolutePath()).listFiles();
+					
+					for(File image : images) {
+						if(!image.getName().equals("bgImage.png") && (image.getName().endsWith(".png") || image.getName().endsWith(".jpg") || image.getName().endsWith(".jpeg"))) {
+							this.view.getTabs().getExplorer().addElement(image);
+						}
+					}
+					
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

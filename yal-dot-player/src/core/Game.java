@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Timer;
 
+import graphics.Vector2f;
 import map.Hitbox;
 import map.Player;
 import mode.Map;
@@ -65,7 +66,7 @@ public class Game implements ActionListener{
 				player.setMovR(true);
 				break;
 			case KeyEvent.VK_Q:
-				player.getPos().setVector2f(50,0);;
+				player.setPos(this.model.getMap().getStartPos());
 				break;
 			case KeyEvent.VK_T:
 				if(this.model.isHitboxVisible())
@@ -73,8 +74,6 @@ public class Game implements ActionListener{
 				else
 					this.model.setHitboxVisible(true);
 				break;
-			default:
-				System.out.println(key);
 			}
 		}
 	}
@@ -113,6 +112,16 @@ public class Game implements ActionListener{
 		player.getPos().addToBoth(player.getSpeed());
 		player.getHitbox().setPos(player.getPos());
 		
+		if(player.getHitbox().getPos().getX() < map.getBounds().getPos().getX()) {
+			player.getPos().addToX(map.getBounds().getPos().getX() - player.getHitbox().getPos().getX());
+			player.getSpeed().setX(0);
+			player.setInAir(true);
+		}else if(player.getHitbox().getPos2().getX() > map.getBounds().getPos2().getX()){
+			player.getPos().addToX(map.getBounds().getPos2().getX() - player.getHitbox().getPos2().getX()-1);
+			player.getSpeed().setX(0);
+			player.setInAir(true);
+		}
+		
 		for(Hitbox hitbox : map.getHitboxes()) {
 			if(player.getHitbox().hitboxIntersect(hitbox)) {
 				
@@ -131,6 +140,20 @@ public class Game implements ActionListener{
 					player.getSpeed().setY(0);
 					player.getPos().addToY(hitbox.getPos().getY() - player.getHitbox().getPos2().getY());
 				}
+			}
+		}
+		
+		for(Hitbox hitbox : map.getDeathboxes()) {
+			if(player.getHitbox().hitboxIntersect(hitbox)) {
+				player.setSpeed(new Vector2f(0,0));
+				player.setPos(map.getStartPos());
+			}
+		}
+		
+		for(Hitbox hitbox : map.getGoalboxes()) {
+			if(player.getHitbox().hitboxIntersect(hitbox)) {
+				player.setSpeed(new Vector2f(0,0));
+				this.model.setMode(Mode.TITLESCREEN);
 			}
 		}
 		

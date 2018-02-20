@@ -18,7 +18,7 @@ import core.Model;
 import core.View;
 
 public class ObjectExplorer extends JPanel implements ActionListener{
-	private JFileChooser fileS = new JFileChooser();
+	private JFileChooser jfc = new JFileChooser();
 	private JButton newBtn = new JButton("import asset");
 	private JPanel objectContainer = new JPanel();
 	private View view;
@@ -41,23 +41,27 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 	}
 	
 
+	public void addElement(File image) {
+		File tempFile = image;
+		BufferedImage tempImg;
+		
+		try {
+			tempImg = ImageIO.read(new File(tempFile.getPath()));
+			Element tempEle = new Element(ObjectType.ASSET,tempImg,this.view,this.model);
+			tempEle.setText(tempFile.getName());
+			this.objectContainer.add(tempEle);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int returnVal = this.fileS.showOpenDialog(this);
+		int returnVal = this.jfc.showOpenDialog(this);
 		
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			File tempFile = this.fileS.getSelectedFile();
-			BufferedImage tempImg;
-			
-			try {
-				tempImg = ImageIO.read(new File(tempFile.getPath()));
-				Element tempEle = new Element(ObjectType.ASSET,tempImg,this.view,this.model);
-				tempEle.setText(tempFile.getName());
-				this.objectContainer.add(tempEle);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			this.addElement(this.jfc.getSelectedFile());
 		}
 	}
 }
