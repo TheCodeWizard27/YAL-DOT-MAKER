@@ -302,8 +302,8 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 					NodeList endboxNode = file.getElementsByTagName("endbox");
-					for(int i = 0; i < hitboxNode.getLength();i++) {
-						Element endboxEle = (Element) hitboxNode.item(i);
+					for(int i = 0; i < endboxNode.getLength();i++) {
+						Element endboxEle = (Element) endboxNode.item(i);
 						
 						Vector2f endboxPos = new Vector2f(Float.parseFloat(endboxEle.getElementsByTagName("posX").item(0).getTextContent()),
 														  Float.parseFloat(endboxEle.getElementsByTagName("posY").item(0).getTextContent()));
@@ -314,8 +314,8 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 					NodeList deathboxNode = file.getElementsByTagName("deathbox");
-					for(int i = 0; i < hitboxNode.getLength();i++) {
-						Element deathboxEle = (Element) hitboxNode.item(i);
+					for(int i = 0; i < deathboxNode.getLength();i++) {
+						Element deathboxEle = (Element) deathboxNode.item(i);
 						
 						Vector2f deathboxPos = new Vector2f(Float.parseFloat(deathboxEle.getElementsByTagName("posX").item(0).getTextContent()),
 														  Float.parseFloat(deathboxEle.getElementsByTagName("posY").item(0).getTextContent()));
