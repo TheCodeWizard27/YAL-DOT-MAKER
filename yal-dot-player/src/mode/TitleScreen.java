@@ -1,6 +1,7 @@
 package mode;
 
 import java.awt.BorderLayout;
+import java.io.File;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -33,14 +34,16 @@ public class TitleScreen {
 		this.mapList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		this.mapList.setLayoutOrientation(JList.VERTICAL);
 		
-		this.list.addElement("TestMap");
-		this.list.addElement("SecondMap");
-		this.list.addElement("Costume Map");
+		File[] maps = new File("src/maps/").listFiles();
+		
+		for(File file : maps) {
+			this.list.addElement(file.getName());
+		}
 		
 		this.mapList.setModel(this.list);
 		
-		this.startBtn = new TitleButton(GameOption.START,model);
-		this.exitBtn = new TitleButton(GameOption.EXIT,model);
+		this.startBtn = new TitleButton(GameOption.START,model,this.mapList);
+		this.exitBtn = new TitleButton(GameOption.EXIT,model,null);
 		this.startBtn.setText("start");
 		this.exitBtn.setText("exit");
 		

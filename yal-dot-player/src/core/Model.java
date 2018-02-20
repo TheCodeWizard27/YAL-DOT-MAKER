@@ -12,7 +12,7 @@ public class Model {
 	private boolean hitboxVisible;
 	
 	public Model() {
-		this.map = new Map();
+		
 	}
 
 	public Map getMap() {
