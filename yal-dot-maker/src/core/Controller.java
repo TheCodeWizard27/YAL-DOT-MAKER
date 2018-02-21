@@ -12,7 +12,7 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.Timer;
 
-public class Controller implements ActionListener, MouseMotionListener, MouseListener, KeyListener, MouseWheelListener{
+public class Controller implements ActionListener, KeyListener, MouseWheelListener{
 	private Model model;
 	private View view;
 	private Timer timer;
@@ -58,46 +58,7 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 			break;
 		}
 	}
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if(this.model.isCtrl()) {
@@ -110,4 +71,10 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 			this.view.getCanvas().getCanvas().setViewportView(this.view.getCanvas());
 		}
 	}
+	
+	/**
+	 * unused methods
+	 */
+	@Override
+	public void keyTyped(KeyEvent e) {}
 }
