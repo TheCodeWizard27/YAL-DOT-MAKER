@@ -29,6 +29,7 @@ public class Asset extends ElementTemplate{
 		g2d.drawImage(asset.getSprite(),0,0,null);
 		
 		this.sprite = spriteCopy;
+		this.spriteName = asset.getSpriteName();
 	}
 	
 	public void setSize(Vector2f size) {
