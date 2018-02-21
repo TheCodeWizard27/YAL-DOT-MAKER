@@ -10,6 +10,7 @@ import core.Model;
 import core.View;
 import map.Asset;
 import map.Deathbox;
+import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
@@ -28,7 +29,7 @@ public class ObjectListBtn extends JButton implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object object = this.model.getCurrentObj();
+		ElementTemplate object = this.model.getCurrentObj();
 		Map map = this.model.getMap();
 		
 		switch(this.type) {
@@ -70,8 +71,35 @@ public class ObjectListBtn extends JButton implements ActionListener{
 			this.model.setCurrentObj(null);
 			this.view.getTabs().addObjectSettings();
 			break;
+		case LAYER_UP:
+			if(map.getAssets().contains(object)) {
+				int layer = map.getAssets().indexOf(object);
+				if(layer < map.getAssets().size()-1) {
+					Asset tempAsset = (Asset) object;
+					map.getAssets().remove(object);
+					map.getAssets().add(++layer,tempAsset);
+				}
+			}else {
+				//not movable
+			}
+			
+			break;
+		case LAYER_DOWN:
+			if(map.getAssets().contains(object)) {
+				int layer = map.getAssets().indexOf(object);
+				if(layer > 0) {
+					Asset tempAsset = (Asset) object;
+					map.getAssets().remove(object);
+					map.getAssets().add(--layer,tempAsset);
+				}
+			}else {
+				//not movable
+			}
+			
+			break;
 		}
 		
 		this.view.getObjectList().update();
+		this.view.getObjectList().getList().setSelectedValue(object.getName(), true);
 	}
 }
