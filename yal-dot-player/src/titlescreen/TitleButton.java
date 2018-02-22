@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -173,8 +174,7 @@ public class TitleButton extends JButton implements ActionListener{
 					
 					this.model.setMap(map);
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(this, "An error occurred while loading the map", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			break;
