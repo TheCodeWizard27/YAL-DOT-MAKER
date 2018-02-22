@@ -39,7 +39,7 @@ public class Player {
 		this.hitbox = new Hitbox(this.pos,this.size);
 		
 		try {
-			this.sprite = ImageIO.read(new File("src/textures/unnamed.png"));
+			this.sprite = ImageIO.read(new File("textures/player.png"));
 			BufferedImage tempImg = new BufferedImage((int)size.getX(),(int)size.getY(),BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
 			g2d.scale(size.getX()/this.sprite.getWidth(), size.getY()/this.sprite.getHeight());

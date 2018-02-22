@@ -44,7 +44,7 @@ public class TitleScreen {
 		this.mapList.setLayoutOrientation(JList.VERTICAL);
 		
 		//gets all maps in maps folder
-		File[] maps = new File("src/maps/").listFiles();
+		File[] maps = new File("maps/").listFiles();
 		
 		if(maps != null) {
 			for(File file : maps) {

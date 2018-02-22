@@ -80,6 +80,9 @@ public class Game implements ActionListener{
 				else
 					this.model.setHitboxVisible(true);
 				break;
+			case KeyEvent.VK_ESCAPE:
+				this.model.setMode(Mode.TITLESCREEN);
+				break;
 			}
 		}
 	}

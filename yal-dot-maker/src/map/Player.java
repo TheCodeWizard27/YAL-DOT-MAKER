@@ -20,7 +20,7 @@ public class Player extends ElementTemplate{
 	public Player(Vector2f pos, Vector2f size) {
 		super("Player", pos,size);
 		try {
-			this.sprite = ImageIO.read(new File("src/textures/unnamed.png"));
+			this.sprite = ImageIO.read(new File("textures/player.png"));
 			this.size = new Vector2f(this.sprite.getWidth(), this.sprite.getHeight());
 		} catch (IOException e) {
 			//add error

@@ -67,7 +67,7 @@ public class TitleButton extends JButton implements ActionListener{
 				try {				
 					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-					Document file = dBuilder.parse(new File("src/maps/" + this.list.getSelectedValue() + "/mapData.xml"));
+					Document file = dBuilder.parse(new File("maps/" + this.list.getSelectedValue() + "/mapData.xml"));
 					file.getDocumentElement().normalize();
 					
 					Map map = new Map();
@@ -76,7 +76,7 @@ public class TitleButton extends JButton implements ActionListener{
 					Element mapEle = (Element) file.getElementsByTagName("map").item(0);
 					Hitbox bounds = new Hitbox(0,0,Float.parseFloat(mapEle.getElementsByTagName("width").item(0).getTextContent())
 												,Float.parseFloat(mapEle.getElementsByTagName("height").item(0).getTextContent()));
-					BufferedImage backgroundImage = ImageIO.read(new File("src/maps/" + this.list.getSelectedValue() + "/bgImage.png"));
+					BufferedImage backgroundImage = ImageIO.read(new File("maps/" + this.list.getSelectedValue() + "/bgImage.png"));
 					
 					map.setBackgroundImg(backgroundImage);
 					map.setBounds(bounds);
@@ -157,7 +157,7 @@ public class TitleButton extends JButton implements ActionListener{
 						BufferedImage tempImg;
 						
 						if(assetEle.hasAttribute("src"))
-							tempImg = ImageIO.read(new File("src/maps/" + this.list.getSelectedValue() + "/" + assetEle.getAttribute("src")));
+							tempImg = ImageIO.read(new File("maps/" + this.list.getSelectedValue() + "/" + assetEle.getAttribute("src")));
 						else {
 							tempImg = new BufferedImage((int)assetSize.getX(),(int)assetSize.getY(),BufferedImage.TYPE_INT_ARGB);
 							for(int y = 0; y < assetSize.getY();y++) {

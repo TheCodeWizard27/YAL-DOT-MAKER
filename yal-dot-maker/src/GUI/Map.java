@@ -28,7 +28,7 @@ public class Map {
 	private BufferedImage backgroundImage = new BufferedImage(450, 300, BufferedImage.TYPE_INT_ARGB);
 
 	public Map() {
-		this.name = "Costum Map";
+		this.name = "Custom Map";
 		this.size = new Vector2f(500, 500);
 	}
 

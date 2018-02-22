@@ -253,7 +253,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					//makes list of images needed to save
 					for(Entry<String,BufferedImage> entry : tempImages.entrySet()) {
 						try {
-							if(new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()).exists())
+							if(!new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()).exists())
 								ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
 						}catch(IOException IOexcept) {
 							JOptionPane.showMessageDialog(this.view, "An error occurred while saving this map.","Error",JOptionPane.ERROR_MESSAGE);
@@ -374,7 +374,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 									tempImg.setRGB(x, y, Integer.parseInt(assetEle.getAttribute("color")));
 								}
 							}
-							asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize,"");
+							asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize,null);
 						}
 						
 						
