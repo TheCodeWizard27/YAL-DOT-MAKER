@@ -3,12 +3,14 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import core.Model;
 
@@ -32,10 +34,13 @@ public class BackgroundImageBtn extends JButton implements ActionListener{
 			File tempFile = this.jfc.getSelectedFile();
 			
 			try {
-				this.model.getMap().setBackgroundImage(ImageIO.read(new File(tempFile.getPath())));
+				BufferedImage tempImg = ImageIO.read(new File(tempFile.getPath()));
+				if(tempImg != null)
+					this.model.getMap().setBackgroundImage(tempImg);
+				else
+					JOptionPane.showMessageDialog(this, "An error occurred with loading the selected image.", "Error", JOptionPane.ERROR_MESSAGE);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this, "An error occurred with loading the selected image.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

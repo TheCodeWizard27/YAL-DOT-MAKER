@@ -36,8 +36,10 @@ public class TitleScreen {
 		
 		File[] maps = new File("src/maps/").listFiles();
 		
-		for(File file : maps) {
-			this.list.addElement(file.getName());
+		if(maps != null) {
+			for(File file : maps) {
+				this.list.addElement(file.getName());
+			}
 		}
 		
 		this.mapList.setModel(this.list);

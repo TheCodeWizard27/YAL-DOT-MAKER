@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -236,7 +237,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 				}catch(Exception except) {
-					except.printStackTrace();
+					JOptionPane.showMessageDialog(this.view, "An error occurred while saving this map.","Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			break;
@@ -363,8 +364,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					}
 					
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(this.view, "An error occurred while loading this map.","Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 
 import constants.ObjectProperty;
 import core.Model;
@@ -61,32 +62,40 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 						if(!this.view.getObjectList().getObjects().containsKey(this.getText())) {
 							object.setName(this.getText());
 						}else {
+							JOptionPane.showMessageDialog(this.view, "Object with same name '"+this.getText()+"' already exists.","Error",JOptionPane.ERROR_MESSAGE);
 							this.setValue(object.getName());
 						}
 					}else {
 						this.setValue(object.getName());
+						JOptionPane.showMessageDialog(this.view, "This object can't be renamed","Error",JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				case WIDTH:
 					if((float)this.getValue() > 0 && (float)this.getValue() <= 999999) {
 						object.setSize(new Vector2f((float)this.getValue(),object.getSize().getY()));
 					}else {
-						
+						JOptionPane.showMessageDialog(this.view, "Index out of bounds, try a number in range [0 - 999999]","Error",JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				case HEIGHT:
 					if((float)this.getValue() > 0 && (float)this.getValue() <= 999999) {
 						object.setSize(new Vector2f(object.getSize().getX(),(float)this.getValue()));
+					}else {
+						JOptionPane.showMessageDialog(this.view, "Index out of bounds, try a number in range [0 - 999999]","Error",JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				case POSX:
-					if((float)this.getValue() > 0 && (float)this.getValue() <= 999999) {
+					if((float)this.getValue() > -999999 && (float)this.getValue() <= 999999) {
 						object.setPos(new Vector2f((float)this.getValue(),object.getPos().getY()));
+					}else {
+						JOptionPane.showMessageDialog(this.view, "Index out of bounds, try a number in range [-999999 - 999999]","Error",JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				case POSY:
-					if((float)this.getValue() > 0 && (float)this.getValue() <= 999999) {
+					if((float)this.getValue() > 999999 && (float)this.getValue() <= 999999) {
 						object.setPos(new Vector2f(object.getPos().getX(),(float)this.getValue()));
+					}else {
+						JOptionPane.showMessageDialog(this.view, "Index out of bounds, try a number in range [-999999 - 999999]","Error",JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				}

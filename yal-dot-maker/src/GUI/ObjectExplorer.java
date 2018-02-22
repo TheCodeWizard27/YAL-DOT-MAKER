@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import constants.ObjectType;
@@ -51,8 +52,7 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 			tempEle.setText(tempFile.getName());
 			this.objectContainer.add(tempEle);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this.view, "An error occured with importing this asset.","Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import constants.ObjectType;
@@ -131,7 +132,8 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 					this.model.getMap().getAssets().add((Asset) tempObj);
 					break;
 				default:
-					tempObj = new Hitbox("Error",new Vector2f(0,0),new Vector2f(0,0));	
+					tempObj = new Hitbox("Error",new Vector2f(0,0),new Vector2f(0,0));
+					JOptionPane.showMessageDialog(this.view, "An error occured whit this object.","Error",JOptionPane.ERROR_MESSAGE);
 				}
 				
 				this.model.setCurrentObj(tempObj);
