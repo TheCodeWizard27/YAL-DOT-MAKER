@@ -44,5 +44,13 @@ class Tests {
 		
 		assert(!model.getMap().getAssets().isEmpty() && model.getMap().getAssets().get(0).getName().equals("TestAsset"));
 	}
+	
+	@Test
+	void copyTest() {
+		Asset asset1 = new Asset(new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB),"TestAsset",new Vector2f(0,0), new Vector2f(100,100),null);
+		Asset assetCopy = new Asset(asset1);
+		
+		assert(asset1 != assetCopy);
+	}
 
 }
