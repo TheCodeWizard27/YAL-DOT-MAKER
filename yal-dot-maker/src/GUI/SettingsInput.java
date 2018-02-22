@@ -74,8 +74,10 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 						if(!this.view.getObjectList().getObjects().containsKey(this.getText())) {
 							object.setName(this.getText());
 						}else {
-							JOptionPane.showMessageDialog(this.view, "Object with same name '"+this.getText()+"' already exists.","Error",JOptionPane.ERROR_MESSAGE);
-							this.setValue(object.getName());
+							if(object.getName() != this.getText()) {
+								JOptionPane.showMessageDialog(this.view, "Object with same name '"+this.getText()+"' already exists.","Error",JOptionPane.ERROR_MESSAGE);
+								this.setValue(object.getName());
+							}
 						}
 					}else {
 						this.setValue(object.getName());
