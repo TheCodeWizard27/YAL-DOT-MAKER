@@ -13,6 +13,11 @@ import javax.swing.ListSelectionModel;
 import core.Model;
 import titlescreen.TitleButton;
 
+/**
+ * class for the titlescreen
+ * @author bschab
+ *
+ */
 public class TitleScreen {
 	private JPanel container;
 	private JLabel title;
@@ -23,6 +28,10 @@ public class TitleScreen {
 	private DefaultListModel list;
 	private JScrollPane scrollPane;
 	
+	/**
+	 * constructor
+	 * @param model passes model information
+	 */
 	public TitleScreen(Model model) {
 		this.title = new JLabel("YAL DOT PLAYER");
 		this.btnContainer = new JPanel();
@@ -34,6 +43,7 @@ public class TitleScreen {
 		this.mapList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		this.mapList.setLayoutOrientation(JList.VERTICAL);
 		
+		//gets all maps in maps folder
 		File[] maps = new File("src/maps/").listFiles();
 		
 		if(maps != null) {
@@ -61,6 +71,9 @@ public class TitleScreen {
 		this.container.setFocusable(false);
 	}
 	
+	/*
+	 * getter
+	 */
 	public JPanel getTitle() {
 		return this.container;
 	}

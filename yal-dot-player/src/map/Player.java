@@ -10,6 +10,11 @@ import javax.imageio.ImageIO;
 
 import graphics.Vector2f;
 
+/**
+ * class that has information about player
+ * @author bschab
+ *
+ */
 public class Player {
 	public static final float JUMP_HEIGHT = 0.75f;
 	public static final float MAX_JUMP_HEIGHT = 6;
@@ -52,9 +57,12 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * updates player position for hitbox
+	 */
 	public void update() {
-		this.hitbox.setPos(this.pos);
 		this.pos.addToBoth(this.speed);
+		this.hitbox.setPos(this.pos);
 	}
 	
 	/**

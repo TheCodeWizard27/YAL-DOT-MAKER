@@ -4,6 +4,11 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import graphics.Vector2f;
 
+/**
+ * class that stores asset information
+ * @author bschab
+ *
+ */
 public class Asset {
 	private BufferedImage sprite;
 	private Vector2f pos;

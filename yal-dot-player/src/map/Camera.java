@@ -1,12 +1,17 @@
 package map;
 
 import graphics.Vector2f;
-
+/**
+ * class that handles the camera
+ * @author bschab
+ *
+ */
 public class Camera {
 	private Hitbox hitbox;
 	private Vector2f pos;
 	private Vector2f size;
 	
+	//constructors
 	public Camera(Vector2f pos, Vector2f size) {
 		this.pos = pos;
 		this.size = size;
@@ -18,19 +23,25 @@ public class Camera {
 		this.hitbox = new Hitbox(x,y,width,height);
 	}
 	
+	/**
+	 * follows player according to bounds
+	 * @param player
+	 * @param bounds
+	 */
 	public void update(Player player, Hitbox bounds) {
 		Vector2f playerCenter = new Vector2f(player.getPos());
 		Vector2f cameraCenter =	new Vector2f(this.pos);
-		playerCenter.addToBoth(new Vector2f(16/2,32/2));
-		cameraCenter.addToBoth(new Vector2f(this.size.getX()/2,this.size.getY()/2));
+		playerCenter.addToBoth(new Vector2f(player.getSprite().getWidth()/2,player.getSprite().getHeight()/2));		//center of player
+		cameraCenter.addToBoth(new Vector2f(this.size.getX()/2,this.size.getY()/2));								//center of camera
 		
-		cameraCenter.addToX((cameraCenter.getX() - playerCenter.getX())*-.05f);
-		cameraCenter.addToY((cameraCenter.getY() - playerCenter.getY())*-.05f);
-		cameraCenter.addToBoth(new Vector2f(this.size.getX()/-2,this.size.getY()/-2));
+		cameraCenter.addToX((cameraCenter.getX() - playerCenter.getX())*-.05f);										//the camera moving
+		cameraCenter.addToY((cameraCenter.getY() - playerCenter.getY())*-.05f);										//
+		cameraCenter.addToBoth(new Vector2f(this.size.getX()/-2,this.size.getY()/-2));								//
 		
 		this.pos.setVector2f(cameraCenter);
 		this.hitbox.setPos(this.pos);
 		
+		//handles the bounds
 		while(this.pos.getX() + this.size.getX() > bounds.getPos2().getX()) {
 			this.pos.addToX(-1f);
 		}

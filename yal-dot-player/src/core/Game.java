@@ -12,6 +12,11 @@ import map.Player;
 import mode.Map;
 import mode.Mode;
 
+/**
+ * main class of the programm
+ * @author bschab
+ *
+ */
 public class Game implements ActionListener{
 	private static Game game;
 	
@@ -32,7 +37,8 @@ public class Game implements ActionListener{
 	}
 	
 	/**
-	 * Main loop
+	 * Implemented ActionListener function
+	 * that has game loop
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -85,7 +91,7 @@ public class Game implements ActionListener{
 		Map map = this.model.getMap();
 		Player player = map.getPlayer();
 		
-		//add movement code later
+		//movement handling
 		if(player.isMovL()) {
 			if(player.getSpeed().getX() > Player.MAX_WALK_SPEED*-1) {
 				player.getSpeed().addToX(Player.WALK_SPEED*-1);
@@ -122,6 +128,7 @@ public class Game implements ActionListener{
 			player.setInAir(true);
 		}
 		
+		//handles physik
 		for(Hitbox hitbox : map.getHitboxes()) {
 			if(player.getHitbox().hitboxIntersect(hitbox)) {
 				
@@ -143,6 +150,7 @@ public class Game implements ActionListener{
 			}
 		}
 		
+		//deathbox handling
 		for(Hitbox hitbox : map.getDeathboxes()) {
 			if(player.getHitbox().hitboxIntersect(hitbox)) {
 				player.setSpeed(new Vector2f(0,0));
@@ -150,6 +158,7 @@ public class Game implements ActionListener{
 			}
 		}
 		
+		//Goalbox handling
 		for(Hitbox hitbox : map.getGoalboxes()) {
 			if(player.getHitbox().hitboxIntersect(hitbox)) {
 				player.setSpeed(new Vector2f(0,0));
@@ -157,7 +166,7 @@ public class Game implements ActionListener{
 			}
 		}
 		
-		map.getCamera().update(player,map.getBounds());
+		map.getCamera().update(player,map.getBounds());		//updates camera position
 		player.setMovL(false);
 		player.setMovR(false);
 		player.setJumping(false);
@@ -173,7 +182,7 @@ public class Game implements ActionListener{
 	}
 	
 	/**
-	 * Public getters n' setters
+	 * getters n' setters
 	 */
 	public InputHandler getInputHandler() {
 		return inputHandler;

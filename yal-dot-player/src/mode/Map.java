@@ -8,6 +8,11 @@ import map.Camera;
 import map.Hitbox;
 import map.Player;
 
+/**
+ * class that has map information
+ * @author bschab
+ *
+ */
 public class Map {
 	private Player player;
 	private Camera camera;
@@ -15,33 +20,28 @@ public class Map {
 	private Hitbox[] hitboxes;
 	private Hitbox[] deathboxes;
 	private Hitbox[] goalboxes;
-	public Hitbox[] getDeathboxes() {
-		return deathboxes;
-	}
-
-	public void setDeathboxes(Hitbox[] deathboxes) {
-		this.deathboxes = deathboxes;
-	}
-
-	public Hitbox[] getGoalboxes() {
-		return goalboxes;
-	}
-
-	public void setGoalboxes(Hitbox[] goalboxes) {
-		this.goalboxes = goalboxes;
-	}
-
-	public void setAssets(Asset[] assets) {
-		this.assets = assets;
-	}
-
 	private Hitbox bounds;
 	private BufferedImage backgroundImg;
 	private Vector2f startPos;
 	
-	public Map() {
+	/*
+	 * getters n' setters
+	 */
+	public Hitbox[] getDeathboxes() {
+		return deathboxes;
 	}
-
+	public void setDeathboxes(Hitbox[] deathboxes) {
+		this.deathboxes = deathboxes;
+	}
+	public Hitbox[] getGoalboxes() {
+		return goalboxes;
+	}
+	public void setGoalboxes(Hitbox[] goalboxes) {
+		this.goalboxes = goalboxes;
+	}
+	public void setAssets(Asset[] assets) {
+		this.assets = assets;
+	}
 	public Player getPlayer() {
 		return player;
 	}
@@ -72,19 +72,15 @@ public class Map {
 	public void setBounds(Hitbox bounds) {
 		this.bounds = bounds;
 	}
-
 	public BufferedImage getBackgroundImg() {
 		return backgroundImg;
 	}
-
 	public void setBackgroundImg(BufferedImage backgroundImg) {
 		this.backgroundImg = backgroundImg;
 	}
-
 	public Vector2f getStartPos() {
 		return startPos;
 	}
-
 	public void setStartPos(Vector2f startPos) {
 		this.startPos = startPos;
 	}

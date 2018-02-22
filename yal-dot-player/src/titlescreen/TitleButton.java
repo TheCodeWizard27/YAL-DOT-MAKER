@@ -28,11 +28,22 @@ import mode.GameOption;
 import mode.Map;
 import mode.Mode;
 
+/**
+ * class for the Title buttons
+ * @author bschab
+ *
+ */
 public class TitleButton extends JButton implements ActionListener{
 	private GameOption type;
 	private Model model;
 	private JList list;
 	
+	/**
+	 * constructor
+	 * @param type passes button type
+	 * @param model passes model information
+	 * @param list passes list information
+	 */
 	public TitleButton(GameOption type, Model model, JList list) {
 		super();
 		this.model = model;
@@ -42,8 +53,11 @@ public class TitleButton extends JButton implements ActionListener{
 		this.setFocusable(false);
 	}
 	
+	/**
+	 * implemented ActionListener function that handles the game loading
+	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		switch(this.type) {
 		case START:
 			if(!this.list.isSelectionEmpty()) {
