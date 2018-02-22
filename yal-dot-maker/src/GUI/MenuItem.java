@@ -253,7 +253,8 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					//makes list of images needed to save
 					for(Entry<String,BufferedImage> entry : tempImages.entrySet()) {
 						try {
-							ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
+							if(new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()).exists())
+								ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
 						}catch(IOException IOexcept) {
 							JOptionPane.showMessageDialog(this.view, "An error occurred while saving this map.","Error",JOptionPane.ERROR_MESSAGE);
 						}
