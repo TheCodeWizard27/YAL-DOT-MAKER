@@ -24,12 +24,25 @@ import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
+/**
+ * class for each element which can be placed inside the map
+ * @author bschab
+ *
+ */
 public class Element extends JLabel implements MouseMotionListener, MouseListener{
 	private ObjectType type;
 	private BufferedImage sprite;
 	private View view;
 	private Model model;
 	
+	/**
+	 * constructor
+	 * 
+	 * @param type passes the object type
+	 * @param sprite passes the image if it has one
+	 * @param view passes information about the GUI
+	 * @param model passes information about the map
+	 */
 	public Element(ObjectType type, BufferedImage sprite, View view, Model model) {
 		super();
 		this.type = type;
@@ -50,51 +63,29 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 		}
 	}
 	
-	public ObjectType getType() {
-		return this.type;
-	}
-	
-	public BufferedImage getSprite() {
-		return this.sprite;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * implemented mouse listener function which
+	 * allows drag and dropping elements onto the canvas
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		Canvas canvas = this.view.getCanvas();
 		
 		if(canvas.getMousePosition() != null) {
-			
+			//define temporary variables
 			Map map = this.model.getMap();
-			float zoom = this.model.getZoom()/100;
-			float imgX = (canvas.getWidth()/2)-((map.getSize().getX()*zoom)/2);
-			float imgY = (canvas.getHeight()/2)-((map.getSize().getY()*zoom)/2);
+			float zoom = this.model.getZoom()/100;										//gets the zoom
+			float imgX = (canvas.getWidth()/2)-((map.getSize().getX()*zoom)/2);			//x gets location of canvas on panel
+			float imgY = (canvas.getHeight()/2)-((map.getSize().getY()*zoom)/2);		//y gets location of canvas on panel
 			double mouseX = canvas.getMousePosition().getX();
 			double mouseY = canvas.getMousePosition().getY();
 			ElementTemplate tempObj;
 			String tempName = "";
 			
+			//checks if mouse inside canvas
 			if(mouseX >= imgX && mouseX <= imgX + map.getSize().getX()*zoom &&
 					mouseY >= imgY && mouseY <= imgY + map.getSize().getY()*zoom) {
+				//switches between object types
 				switch(this.type) {
 				case HITBOX:
 					tempName = "Hitbox" + map.getHitboxes().size();
@@ -136,19 +127,44 @@ public class Element extends JLabel implements MouseMotionListener, MouseListene
 					JOptionPane.showMessageDialog(this.view, "An error occured whit this object.","Error",JOptionPane.ERROR_MESSAGE);
 				}
 				
-				this.model.setCurrentObj(tempObj);
-				this.view.getObjectList().update();
-				this.view.getObjectList().getList().setSelectedValue(tempName, true);
+				this.model.setCurrentObj(tempObj);											//sets current object
+				this.view.getObjectList().update();											//updates object list
+				this.view.getObjectList().getList().setSelectedValue(tempName, true);		//selects inserted object
 			}
 		}
 	}
-	@Override
-	public void mouseDragged(MouseEvent e) {
-
-	}
+	
+	/**
+	 * changes cursor when over drag n' dropable element
+	 */
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
 	}
+	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
+	public ObjectType getType() {
+		return this.type;
+	}
+	
+	public BufferedImage getSprite() {
+		return this.sprite;
+	}
+	
+	/**
+	 * unused functions
+	 */
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
 }

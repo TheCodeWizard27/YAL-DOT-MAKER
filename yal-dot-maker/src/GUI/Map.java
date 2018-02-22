@@ -11,6 +11,11 @@ import map.EndBox;
 import map.Hitbox;
 import map.Player;
 
+/**
+ * class that holds information about the map
+ * @author bschab
+ *
+ */
 public class Map {
 	private Player player = new Player(new Vector2f(0, 0), new Vector2f(38, 64));
 	private String name;
@@ -27,46 +32,40 @@ public class Map {
 		this.size = new Vector2f(500, 500);
 	}
 
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public Player getPlayer() {
 		return player;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public Vector2f getSize() {
 		return size;
 	}
-
 	public ArrayList<EndBox> getEndBox() {
 		return endBox;
 	}
-
 	public Camera getCamera() {
 		return camera;
 	}
-
 	public ArrayList<Asset> getAssets() {
 		return assets;
 	}
-
 	public ArrayList<Hitbox> getHitboxes() {
 		return hitboxes;
 	}
-
 	public ArrayList<Deathbox> getDeathboxes() {
 		return deathboxes;
 	}
-
 	public BufferedImage getBackgroundImage() {
 		return backgroundImage;
 	}
-
 	public void setBackgroundImage(BufferedImage backgroundImage) {
 		this.backgroundImage = backgroundImage;
 	}

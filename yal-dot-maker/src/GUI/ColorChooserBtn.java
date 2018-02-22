@@ -9,10 +9,18 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
+/**
+ * class for choosing the color of a certain image
+ * @author bschab
+ *
+ */
 public class ColorChooserBtn extends JButton implements ActionListener{
-
 	BufferedImage image;
 	
+	/**
+	 * constructor
+	 * @param image passes the pointer to the image
+	 */
 	public ColorChooserBtn(BufferedImage image){
 		super("choose Color");
 		this.image = image;
@@ -20,6 +28,10 @@ public class ColorChooserBtn extends JButton implements ActionListener{
 		this.setMaximumSize(new Dimension(200,20));
 	}
 	
+	/**
+	 * implements function of action listener
+	 * which changes color of image
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Color tempColor = JColorChooser.showDialog(this, "Set color of Element.", new Color(this.image.getRGB(0, 0)));

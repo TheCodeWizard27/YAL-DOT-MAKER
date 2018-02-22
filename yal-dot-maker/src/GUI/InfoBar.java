@@ -1,12 +1,16 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+/**
+ * class for info bar at the bottom of the screen
+ * @author bschab
+ *
+ */
 public class InfoBar {
 	private JPanel container;
 	private JLabel pos;
@@ -26,6 +30,10 @@ public class InfoBar {
 		this.container.setBorder(new BevelBorder(BevelBorder.LOWERED));
 	}
 	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public JPanel getInfoBar() {
 		return this.container;
 	}

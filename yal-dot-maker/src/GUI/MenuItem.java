@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -37,12 +36,23 @@ import map.Deathbox;
 import map.EndBox;
 import map.Hitbox;
 
+/**
+ * class for the menuItems inside the menuBar
+ * @author bschab
+ *
+ */
 public class MenuItem extends JMenuItem implements ActionListener{
 	private Menu type;
 	private Model model;
 	private View view;
 	private JFileChooser jfc = new JFileChooser();
 	
+	/**
+	 * constructor
+	 * @param type passes type of item
+	 * @param model passes model information
+	 * @param view passes GUI information
+	 */
 	public MenuItem(Menu type, Model model,View view) {
 		super(type.toString().toLowerCase());
 		this.addActionListener(this);
@@ -52,6 +62,11 @@ public class MenuItem extends JMenuItem implements ActionListener{
 		this.view = view;
 	}
 	
+	/**
+	 * Implemented Actionlistener function
+	 * which loads, saves or creates new Map
+	 * depending on chosen option
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(this.type) {
@@ -59,12 +74,11 @@ public class MenuItem extends JMenuItem implements ActionListener{
 			int returnVal = this.jfc.showSaveDialog(this);
 			
 			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				
 				File tempDir = this.jfc.getSelectedFile();
-
 				Map map = this.model.getMap();
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder;
+				
 				try {
 					dBuilder = dbFactory.newDocumentBuilder();
 					Document file = dBuilder.newDocument();
@@ -92,6 +106,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					mapEle.appendChild(mapBackground);
 					
 					container.appendChild(mapEle);
+					//
 					
 					//adding player information
 					Element playerEle = file.createElement("player");
@@ -111,6 +126,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					playerEle.appendChild(playerHeight);
 					
 					container.appendChild(playerEle);
+					//
 					
 					//adding camera information
 					Element cameraEle = file.createElement("camera");
@@ -131,6 +147,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					
 					container.appendChild(cameraEle);
 					
+					//adding map objects
 					for(Hitbox hitbox : map.getHitboxes()) {
 						Element hitboxEle = file.createElement("hitbox");
 						Element hitboxPosX = file.createElement("posX");
@@ -222,6 +239,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 						
 						container.appendChild(assetEle);
 					}
+					//
 					
 					file.appendChild(container);
 					
@@ -232,6 +250,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					
 					transformer.transform(input, output);
 					
+					//makes list of images needed to save
 					for(Entry<String,BufferedImage> entry : tempImages.entrySet()) {
 						ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
 					}
@@ -291,6 +310,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					map.getCamera().setPos(cameraPos);
 					map.getCamera().setSize(cameraSize);
 					
+					//getting map objects
 					NodeList hitboxNode = file.getElementsByTagName("hitbox");
 					for(int i = 0; i < hitboxNode.getLength();i++) {
 						Element hitboxEle = (Element) hitboxNode.item(i);
@@ -353,8 +373,9 @@ public class MenuItem extends JMenuItem implements ActionListener{
 						map.getAssets().add(asset);
 					}
 					
-					this.view.resetGUI();
+					this.view.resetGUI(); 																	//updates gui
 					
+					//imports all images
 					File[] images = new File(this.jfc.getSelectedFile().getAbsolutePath()).listFiles();
 					
 					for(File image : images) {

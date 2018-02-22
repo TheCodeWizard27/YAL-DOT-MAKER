@@ -6,13 +6,24 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import constants.MapProperty;
 
+/**
+ * class for changing map propertys
+ * @author bschab
+ *
+ */
 public class InputField extends JFormattedTextField implements PropertyChangeListener{
 	private Map map;
 	private MapProperty property;
 	
+	/**
+	 * constructor
+	 * @param map passes map information to change
+	 * @param property defines which property to change
+	 */
 	public InputField(Map map, MapProperty property) {
 		super();
 		this.map = map;
@@ -35,6 +46,10 @@ public class InputField extends JFormattedTextField implements PropertyChangeLis
 		this.addPropertyChangeListener(this);
 	}
 	
+	/**
+	 * implemented PropertyChangeListener function
+	 * changes map properties
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		try {
@@ -43,10 +58,16 @@ public class InputField extends JFormattedTextField implements PropertyChangeLis
 				this.map.setName(this.getText());
 				break;
 			case WIDTH:
-				this.map.getSize().setX(Float.parseFloat(this.getText()));
+				if(Float.parseFloat(this.getText()) > 0)
+					this.map.getSize().setX(Float.parseFloat(this.getText()));
+				else 
+					JOptionPane.showMessageDialog(this,"Map width can't be less than or 0.","Error",JOptionPane.ERROR_MESSAGE);
 				break;
 			case HEIGHT:
-				this.map.getSize().setY(Float.parseFloat(this.getText()));
+				if(Float.parseFloat(this.getText()) > 0)
+					this.map.getSize().setY(Float.parseFloat(this.getText()));
+				else 
+					JOptionPane.showMessageDialog(this,"Map height can't be less than or 0.","Error",JOptionPane.ERROR_MESSAGE);
 				break;
 			}
 		}catch(java.lang.NumberFormatException exc){

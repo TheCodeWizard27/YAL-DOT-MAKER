@@ -2,6 +2,11 @@ package map;
 
 import graphics.Vector2f;
 
+/**
+ * parent class for all object types
+ * @author bschab
+ *
+ */
 public class ElementTemplate {
 	protected String name;
 	protected Vector2f pos;
@@ -13,6 +18,10 @@ public class ElementTemplate {
 		this.size = new Vector2f(size);
 	}
 
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}

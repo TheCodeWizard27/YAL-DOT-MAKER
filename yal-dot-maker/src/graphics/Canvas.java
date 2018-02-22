@@ -22,11 +22,21 @@ import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
+/**
+ * canvas class shows map information 
+ * @author bschab
+ *
+ */
 public class Canvas extends JPanel implements MouseListener, MouseMotionListener{
 	private Model model;
 	private View view;
 	private JScrollPane scrollBar;
 	
+	/**
+	 * constructor
+	 * @param model of controller
+	 * @param view passes needed information about GUI
+	 */
 	public Canvas(Model model, View view) {
 		super();
 		this.model = model;
@@ -41,34 +51,40 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		this.setPreferredSize(new Dimension((int)this.model.getMap().getSize().getX(),(int)this.model.getMap().getSize().getY()));
 	}
 	
+	/**
+	 * overwrites paintComponent function which draws JPanel
+	 */
 	public void paintComponent(Graphics g) {
-		//declare for use
-		Graphics2D g2d = (Graphics2D) g;
-		float zoom = this.model.getZoom()/100;
-		Map map = this.model.getMap();
+		//declaring	
+		Graphics2D g2d = (Graphics2D) g;									//graphics of this object
+		float zoom = this.model.getZoom()/100;								//current zoom level
+		Map map = this.model.getMap();				
 		BufferedImage display = new BufferedImage((int)(map.getSize().getX()*zoom),(int)(map.getSize().getY()*zoom),BufferedImage.TYPE_INT_ARGB);
-		Graphics2D tg2d = (Graphics2D) display.getGraphics();
+		Graphics2D tg2d = (Graphics2D) display.getGraphics();				//graphics of display image declared above
 		
 		this.setPreferredSize(new Dimension((int)(map.getSize().getX()*zoom),(int)(map.getSize().getY()*zoom)));
-		float imgX = (this.getWidth()/2)-((map.getSize().getX()*zoom)/2);
-		float imgY = (this.getHeight()/2)-((map.getSize().getY()*zoom)/2);
+		float imgX = (this.getWidth()/2)-((map.getSize().getX()*zoom)/2);	//x position of canvas in this object
+		float imgY = (this.getHeight()/2)-((map.getSize().getY()*zoom)/2);	//y position of canvas in this object
 		
-		g2d.setColor(new Color(150,150,150));
-		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g2d.setColor(new Color(150,150,150));								//clears screen and
+		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());				//draws backdrop
 		
 		tg2d.setColor(Color.WHITE);
-		tg2d.fillRect(0, 0, (int)(map.getSize().getX()*zoom), (int)(map.getSize().getY()*zoom));
+		tg2d.fillRect(0, 0, (int)(map.getSize().getX()*zoom), (int)(map.getSize().getY()*zoom));	//draws background of canvas
 		tg2d.scale(zoom, zoom);	
 		
 		//drawing
 
+		//sizes background to correct size
 		BufferedImage tempBackground = new BufferedImage(map.getBackgroundImage().getWidth(),map.getBackgroundImage().getHeight(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D tempG2d = (Graphics2D) tempBackground.getGraphics();
 		tempG2d.scale(map.getCamera().getSize().getX()/(float)tempBackground.getWidth(), map.getCamera().getSize().getY()/(float)tempBackground.getHeight());
 		tempG2d.drawImage(map.getBackgroundImage(),0,0,null);
 		
 		tg2d.drawImage(tempBackground, (int)map.getCamera().getPos().getX(), (int)map.getCamera().getPos().getY(),null);
+		//
 		
+		//draws map information to display
 		for(Asset asset : map.getAssets()) {
 			tg2d.drawImage(asset.getSprite(), (int)asset.getPos().getX(), (int)asset.getPos().getY(), null);
 		}
@@ -93,16 +109,22 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			tg2d.drawRect((int)map.getCamera().getPos().getX(), (int)map.getCamera().getPos().getY(), 
 					(int)map.getCamera().getSize().getX(), (int)map.getCamera().getSize().getY());
 		}
-		
 		//end drawing
 		
 		g2d.drawImage(display, (int)imgX, (int)imgY, null);
 	}
 	
+	/**
+	 * @return returns canvas intergrated in JScrollPane
+	 */
 	public JScrollPane getCanvas() {
 		return this.scrollBar;
 	}
 
+	/**
+	 * implemented MouseMotionListener functions
+	 * handles the moving of images
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(this.model.getCurrentObj() != null) {
@@ -118,7 +140,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			this.view.getTabs().addObjectSettings();
 		}
 	}
-
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		this.requestFocus();
@@ -136,19 +157,17 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		}
 	}
 	
-
+	/**
+	 * unused functions
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {}
-
 	@Override
 	public void mouseEntered(MouseEvent e) {}
-
 	@Override
 	public void mouseExited(MouseEvent e) {}
-
 	@Override
 	public void mousePressed(MouseEvent e) {}
-
 	@Override
 	public void mouseReleased(MouseEvent e) {}
 }

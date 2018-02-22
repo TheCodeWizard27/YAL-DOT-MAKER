@@ -4,14 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 import javax.swing.Timer;
 
+/**
+ * Controller class controlls the programm
+ * @author bschab
+ *
+ */
 public class Controller implements ActionListener, KeyListener, MouseWheelListener{
 	private Model model;
 	private View view;
@@ -30,7 +32,7 @@ public class Controller implements ActionListener, KeyListener, MouseWheelListen
 	}
 	
 	/**
-	 * Automatically updates view if normal repainter's not added
+	 * Automatically updates view and information about it
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -42,6 +44,9 @@ public class Controller implements ActionListener, KeyListener, MouseWheelListen
 		this.view.repaint();
 	}
 	
+	/**
+	 * Key press function for toggeling between zooming mode
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
@@ -59,6 +64,9 @@ public class Controller implements ActionListener, KeyListener, MouseWheelListen
 		}
 	}
 	
+	/**
+	 * mouseWheel listener function handles zooming
+	 */
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if(this.model.isCtrl()) {
@@ -72,18 +80,19 @@ public class Controller implements ActionListener, KeyListener, MouseWheelListen
 		}
 	}
 	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public Model getModel() {
 		return model;
 	}
-
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
 	public View getView() {
 		return view;
 	}
-
 	public void setView(View view) {
 		this.view = view;
 	}

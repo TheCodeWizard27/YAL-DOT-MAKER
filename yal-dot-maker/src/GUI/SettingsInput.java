@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -17,16 +15,28 @@ import core.View;
 import graphics.Vector2f;
 import map.ElementTemplate;
 
+/**
+ * class for changing the properties of a certain object
+ * @author bschab
+ *
+ */
 public class SettingsInput extends JFormattedTextField implements FocusListener, KeyListener{
 	private Model model;
 	private View view;
 	private ObjectProperty property;
 	
+	/**
+	 * constructor
+	 * @param view passes GUI information
+	 * @param model passes model information
+	 * @param property passes property to change
+	 */
 	public SettingsInput(View view, Model model, ObjectProperty property) {
 		this.model = model;
 		this.view = view;
 		this.property = property;
 		
+		//sets default values
 		switch(property) {
 		case NAME:
 			this.setValue(this.model.getCurrentObj().getName());
@@ -51,7 +61,9 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 		this.addFocusListener(this);
 	}
 
-
+	/**
+	 * updates object to input
+	 */
 	public void update() {
 			if(this.model.getCurrentObj() != null) {
 				ElementTemplate object = this.model.getCurrentObj();
@@ -104,22 +116,28 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 			}
 	}
 
-	
-
+	/**
+	 * implemented FocusListener function
+	 * which updates values on focus lost
+	 */
 	@Override
 	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
 		this.update();
 	}
-
 	
-
+	/**
+	 * implemented KeyListener
+	 * which updates on pressing enter
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER)
 			this.update();
 	}
 
+	/**
+	 * unused functions
+	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
 	@Override

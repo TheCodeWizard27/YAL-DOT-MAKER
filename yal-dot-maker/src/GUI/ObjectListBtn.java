@@ -15,11 +15,22 @@ import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
+/**
+ * class for the Buttons of the Object list
+ * @author bschab
+ *
+ */
 public class ObjectListBtn extends JButton implements ActionListener{
 	private View view;
 	private Model model;
 	private ObjectModes type;
 	
+	/**
+	 * constructor
+	 * @param view passes GUI information
+	 * @param model passes model information
+	 * @param type passe button type
+	 */
 	public ObjectListBtn(View view, Model model, ObjectModes type) {
 		super(type.toString().toLowerCase());
 		this.view = view;
@@ -28,6 +39,10 @@ public class ObjectListBtn extends JButton implements ActionListener{
 		this.addActionListener(this);
 	}
 	
+	/**
+	 * Implemented ActionListener function
+	 * does whatever the chosen button does
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ElementTemplate object = this.model.getCurrentObj();

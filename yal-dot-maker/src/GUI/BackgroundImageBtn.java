@@ -14,11 +14,19 @@ import javax.swing.JOptionPane;
 
 import core.Model;
 
+/**
+ * class for settings background image
+ * @author bschab
+ *
+ */
 public class BackgroundImageBtn extends JButton implements ActionListener{
-
 	Model model;
 	JFileChooser jfc = new JFileChooser();
 	
+	/**
+	 * constructor
+	 * @param model passes information about model
+	 */
 	public BackgroundImageBtn(Model model) {
 		super("set background image");
 		this.model = model;
@@ -26,6 +34,11 @@ public class BackgroundImageBtn extends JButton implements ActionListener{
 		this.addActionListener(this);
 	}
 	
+	/**
+	 * implemented ActionListener function
+	 * if button is pressed ask which picture should be used for
+	 * the background
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int returnVal = this.jfc.showOpenDialog(this);

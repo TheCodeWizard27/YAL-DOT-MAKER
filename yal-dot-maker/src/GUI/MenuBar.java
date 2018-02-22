@@ -9,6 +9,11 @@ import constants.Menu;
 import core.Model;
 import core.View;
 
+/**
+ * class for the menuBar	
+ * @author bschab
+ *
+ */
 public class MenuBar {
 	private JMenuBar menuBar;
 	private JMenu menuDrop;
@@ -16,6 +21,11 @@ public class MenuBar {
 	private JLabel hitboxLabel;
 	private HitboxCheck hitboxCheckBox;
 	
+	/**
+	 * constructor
+	 * @param model passes model information
+	 * @param view passes GUI information
+	 */
 	public MenuBar(Model model, View view) {
 		this.menuBar = new JMenuBar();
 		this.menuDrop = new JMenu("File");
@@ -35,6 +45,10 @@ public class MenuBar {
 		this.menuBar.add(this.hitboxCheckBox);
 	}
 	
+	/**
+	 * getter function
+	 * @return returns menuBar
+	 */
 	public JMenuBar getMenuBar() {
 		return this.menuBar;
 	}

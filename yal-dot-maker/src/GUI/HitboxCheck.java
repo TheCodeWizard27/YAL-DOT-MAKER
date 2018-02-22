@@ -7,10 +7,18 @@ import javax.swing.JCheckBox;
 
 import core.Model;
 
+/**
+ * checkbox for showing hitboxes
+ * @author bschab
+ *
+ */
 public class HitboxCheck extends JCheckBox implements ActionListener{
-	
 	private Model model;
 	
+	/**
+	 * constructor
+	 * @param model passes information about model
+	 */
 	public HitboxCheck(Model model) {
 		super();
 		this.model = model;

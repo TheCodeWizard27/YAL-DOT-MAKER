@@ -18,6 +18,11 @@ import constants.ObjectType;
 import core.Model;
 import core.View;
 
+/**
+ * class for the object explorer
+ * @author bschab
+ *
+ */
 public class ObjectExplorer extends JPanel implements ActionListener{
 	private JFileChooser jfc = new JFileChooser();
 	private JButton newBtn = new JButton("import asset");
@@ -25,6 +30,11 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 	private View view;
 	private Model model;
 	
+	/**
+	 * constructor
+	 * @param view passes GUI information
+	 * @param model passes model information
+	 */
 	public ObjectExplorer(View view, Model model) {
 		super();
 		this.view = view;
@@ -36,12 +46,16 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 			Element element = new Element(type, null, view , model);
 			this.objectContainer.add(element);
 		}
+		
 		this.newBtn.addActionListener(this);
 		this.add(objectContainer, BorderLayout.CENTER);
 		this.add(newBtn, BorderLayout.SOUTH);
 	}
 	
-
+	/**
+	 * Function which adds new Element to ObjectExplorer
+	 * @param image passes the image of the new Asset
+	 */
 	public void addElement(File image) {
 		File tempFile = image;
 		BufferedImage tempImg;
@@ -56,6 +70,10 @@ public class ObjectExplorer extends JPanel implements ActionListener{
 		}
 	}
 	
+	/**
+	 * implemented ActionListener function
+	 * which gets selected image
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int returnVal = this.jfc.showOpenDialog(this);

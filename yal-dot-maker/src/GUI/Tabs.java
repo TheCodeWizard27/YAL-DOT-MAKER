@@ -15,6 +15,11 @@ import core.Model;
 import core.View;
 import map.Asset;
 
+/**
+ * class for the tabs
+ * @author bschab
+ *
+ */
 public class Tabs{
 	private Model model;
 	private View view;
@@ -23,6 +28,11 @@ public class Tabs{
 	private ObjectExplorer objectExplorerTab;
 	private JPanel objectSettingsTab;
 	
+	/**
+	 * constructor
+	 * @param model passes model information
+	 * @param view passes GUI information
+	 */
 	public Tabs(Model model, View view) {
 		this.model = model;
 		this.view = view;
@@ -38,14 +48,9 @@ public class Tabs{
 		this.tabs.add("Object Settings", this.objectSettingsTab);
 	}
 	
-	public JTabbedPane getTabBar() {
-		return this.tabs;
-	}
-	
-	public ObjectExplorer getExplorer() {
-		return this.objectExplorerTab;
-	}
-	
+	/**
+	 * adds Map properties settings to tabs
+	 */
 	public void addMapSettings() {
 		this.mapSettingsTab = new JPanel();
 		this.mapSettingsTab.setLayout(new BorderLayout());
@@ -83,12 +88,17 @@ public class Tabs{
 		this.mapSettingsTab.add(container, BorderLayout.WEST);
 	}
 
-	
+	/**
+	 * adds new ObjectExplorer to tabs
+	 */
 	public void addObjectExplorer() {
 		this.objectExplorerTab = new ObjectExplorer(this.view, this.model);
-		
 	}
 	
+	/**
+	 * adds ObjectSettings tab for current
+	 * selected Object
+	 */
 	public void addObjectSettings() {
 		if(this.objectSettingsTab != null)
 			this.tabs.remove(this.objectSettingsTab);
@@ -125,5 +135,16 @@ public class Tabs{
 			this.tabs.setSelectedIndex(2);
 		
 		this.tabs.revalidate();
+	}
+	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
+	public JTabbedPane getTabBar() {
+		return this.tabs;
+	}
+	public ObjectExplorer getExplorer() {
+		return this.objectExplorerTab;
 	}
 }

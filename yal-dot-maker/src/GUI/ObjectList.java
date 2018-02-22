@@ -22,6 +22,11 @@ import map.ElementTemplate;
 import map.EndBox;
 import map.Hitbox;
 
+/**
+ * class for the object list
+ * @author bschab
+ *
+ */
 public class ObjectList implements ListSelectionListener{
 	private Model model;
 	private View view;
@@ -35,6 +40,11 @@ public class ObjectList implements ListSelectionListener{
 	
 	private HashMap<String, ElementTemplate> objects = new HashMap<String,ElementTemplate>();
 	
+	/**
+	 * constructor
+	 * @param model passes model information
+	 * @param view passes GUI information
+	 */
 	public ObjectList(Model model, View view){
 		this.model = model;
 		this.view = view;
@@ -63,18 +73,9 @@ public class ObjectList implements ListSelectionListener{
 		this.objectsList.addListSelectionListener(this);
 	}
 	
-	public JPanel getObjectList() {
-		return this.container;
-	}
-	
-	public JList getList() {
-		return this.objectsList;
-	}
-	
-	public HashMap<String, ElementTemplate> getObjects(){
-		return this.objects;
-	}
-	
+	/**
+	 * updates object list if new object has been added
+	 */
 	public void update() {
 		Map map = this.model.getMap();
 	
@@ -104,9 +105,27 @@ public class ObjectList implements ListSelectionListener{
 			this.list.addElement(list.getKey());
 		}
 	}
-
+	
+	/**
+	 * Implemented function of valueChangeListener
+	 * updates Object Settings tab
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		this.view.getTabs().addObjectSettings();
+	}
+	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
+	public JPanel getObjectList() {
+		return this.container;
+	}
+	public JList getList() {
+		return this.objectsList;
+	}
+	public HashMap<String, ElementTemplate> getObjects(){
+		return this.objects;
 	}
 }

@@ -9,6 +9,11 @@ import javax.imageio.ImageIO;
 
 import graphics.Vector2f;
 
+/**
+ * class for the player object
+ * @author bschab
+ *
+ */
 public class Player extends ElementTemplate{
 	private BufferedImage sprite;
 	
@@ -23,6 +28,10 @@ public class Player extends ElementTemplate{
 		}
 	}
 	
+	/**
+	 * sets size of player and
+	 * changes accordingly
+	 */
 	public void setSize(Vector2f size) {
 		BufferedImage tempImg = new BufferedImage((int)size.getX(),(int)size.getY(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) tempImg.getGraphics();
@@ -33,6 +42,10 @@ public class Player extends ElementTemplate{
 		this.size = new Vector2f(size);
 	}
 	
+	/**
+	 * getter and setter method
+	 * @return
+	 */
 	public BufferedImage getSprite() {
 		return this.sprite;
 	}

@@ -1,7 +1,6 @@
 package core;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +12,11 @@ import GUI.ObjectList;
 import GUI.Tabs;
 import graphics.Canvas;
 
+/**
+ * View class holds all GUI elements that are shown
+ * @author bschab
+ *
+ */
 public class View extends JFrame {
 	private static View view;
 	private Model model;
@@ -24,6 +28,12 @@ public class View extends JFrame {
 	private Canvas canvas;
 	private JPanel container;
 
+	/**
+	 * constructor of view which is private
+	 * for singleton
+	 * 
+	 * @param model of the controller
+	 */
 	private View(Model model) {
 		super("YAL DOT MAKER");
 		this.tabs = new Tabs(model, this);
@@ -49,6 +59,10 @@ public class View extends JFrame {
 		this.setVisible(true);
 	}
 
+	
+	/**
+	 * updates GUI if for example map is loaded or created anew
+	 */
 	public void resetGUI() {
 
 		this.getContentPane().removeAll();
@@ -74,6 +88,12 @@ public class View extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * singleton constructor 
+	 * 
+	 * @param model
+	 * @return returns only once created view object
+	 */
 	public static View getInstance(Model model) {
 		if (View.view == null) {
 			View.view = new View(model);
@@ -82,50 +102,40 @@ public class View extends JFrame {
 		return View.view;
 	}
 
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public ObjectList getObjectList() {
 		return objectList;
 	}
-
 	public void setObjectList(ObjectList objectList) {
 		this.objectList = objectList;
 	}
-
 	public Canvas getCanvas() {
 		return this.canvas;
 	}
-
 	public Model getModel() {
 		return model;
 	}
-
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
 	public MenuBar getMenu() {
 		return menu;
 	}
-
 	public void setMenu(MenuBar menu) {
 		this.menu = menu;
 	}
-
 	public InfoBar getInfoBar() {
 		return infoBar;
 	}
-
 	public void setInfoBar(InfoBar infoBar) {
 		this.infoBar = infoBar;
 	}
-
-	public JPanel getContainer() {
-		return this.container;
-	}
-
 	public Tabs getTabs() {
 		return tabs;
 	}
-
 	public void setTabs(Tabs tabs) {
 		this.tabs = tabs;
 	}

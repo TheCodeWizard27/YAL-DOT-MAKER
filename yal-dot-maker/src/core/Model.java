@@ -1,9 +1,13 @@
 package core;
 
 import GUI.Map;
-import graphics.Vector2f;
 import map.ElementTemplate;
 
+/**
+ * model class which holds program information
+ * @author bschab
+ *
+ */
 public class Model {
 	private boolean highlightHitbox;
 	private Map map;
@@ -15,6 +19,10 @@ public class Model {
 		this.map = new Map();
 	}
 	
+	/**
+	 * getters n' setters
+	 * @return
+	 */
 	public boolean isHighlightHitbox() {
 		return highlightHitbox;
 	}
