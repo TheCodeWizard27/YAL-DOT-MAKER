@@ -1,11 +1,13 @@
 package testing;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import map.Hitbox;
-
+/**
+ * Test class will not be included in original build
+ * @author bschab
+ *
+ */
 class Tests {
 
 	/**

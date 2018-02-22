@@ -10,7 +10,11 @@ import core.Model;
 import core.View;
 import graphics.Vector2f;
 import map.Asset;
-
+/**
+ * Test class not included in main program
+ * @author bschab
+ *
+ */
 class Tests {
 
 	@Test
