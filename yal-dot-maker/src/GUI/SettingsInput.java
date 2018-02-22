@@ -74,7 +74,7 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 						if(!this.view.getObjectList().getObjects().containsKey(this.getText())) {
 							object.setName(this.getText());
 						}else {
-							if(object.getName() != this.getText()) {
+							if(!object.getName().equals(this.getText())) {
 								JOptionPane.showMessageDialog(this.view, "Object with same name '"+this.getText()+"' already exists.","Error",JOptionPane.ERROR_MESSAGE);
 								this.setValue(object.getName());
 							}
@@ -106,7 +106,7 @@ public class SettingsInput extends JFormattedTextField implements FocusListener,
 					}
 					break;
 				case POSY:
-					if((float)this.getValue() > 999999 && (float)this.getValue() <= 999999) {
+					if((float)this.getValue() > -999999 && (float)this.getValue() <= 999999) {
 						object.setPos(new Vector2f(object.getPos().getX(),(float)this.getValue()));
 					}else {
 						JOptionPane.showMessageDialog(this.view, "Index out of bounds, try a number in range [-999999 - 999999]","Error",JOptionPane.ERROR_MESSAGE);

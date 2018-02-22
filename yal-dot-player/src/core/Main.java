@@ -1,7 +1,7 @@
 package core;
 
 /**
- * main class initialises game
+ * main class initializes game
  * @author bschab
  *
  */

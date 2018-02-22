@@ -252,7 +252,11 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					
 					//makes list of images needed to save
 					for(Entry<String,BufferedImage> entry : tempImages.entrySet()) {
-						ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
+						try {
+							ImageIO.write(entry.getValue(), "png", new File(tempDir.getAbsolutePath() + "\\" + map.getName() + "\\" + entry.getKey()));
+						}catch(IOException IOexcept) {
+							JOptionPane.showMessageDialog(this.view, "An error occurred while saving this map.","Error",JOptionPane.ERROR_MESSAGE);
+						}
 					}
 					
 				}catch(Exception except) {
@@ -351,15 +355,17 @@ public class MenuItem extends JMenuItem implements ActionListener{
 					for(int i = 0; i < assetNode.getLength();i++) {
 						Element assetEle = (Element) assetNode.item(i);
 						BufferedImage tempImg;
+						Asset asset;
 						
 						Vector2f assetPos = new Vector2f(Float.parseFloat(assetEle.getElementsByTagName("posX").item(0).getTextContent()),
 								  							Float.parseFloat(assetEle.getElementsByTagName("posY").item(0).getTextContent()));
 						Vector2f assetSize = new Vector2f(Float.parseFloat(assetEle.getElementsByTagName("width").item(0).getTextContent()),
 								  						     Float.parseFloat(assetEle.getElementsByTagName("height").item(0).getTextContent()));
 						
-						if(assetEle.hasAttribute("src"))
+						if(assetEle.hasAttribute("src")) {
 							tempImg = ImageIO.read(new File(this.jfc.getSelectedFile().getAbsolutePath() + "\\" + assetEle.getAttribute("src")));
-						else {
+							asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize, assetEle.getAttribute("src"));
+						}else {
 							tempImg = new BufferedImage((int)assetSize.getX(), (int)assetSize.getY(),BufferedImage.TYPE_INT_ARGB);
 							
 							for(int y = 0; y < assetSize.getY();y++) {
@@ -367,9 +373,10 @@ public class MenuItem extends JMenuItem implements ActionListener{
 									tempImg.setRGB(x, y, Integer.parseInt(assetEle.getAttribute("color")));
 								}
 							}
+							asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize,"");
 						}
 						
-						Asset asset = new Asset(tempImg, assetEle.getAttribute("name"),assetPos, assetSize, assetEle.getAttribute("src"));
+						
 						map.getAssets().add(asset);
 					}
 					
