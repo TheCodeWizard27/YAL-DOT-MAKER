@@ -266,11 +266,15 @@ public class MenuItem extends JMenuItem implements ActionListener{
 			}
 			break;
 		case NEW:
-			this.model.setMap(new Map());
-			this.model.setCurrentObj(null);
-			this.model.setZoom(100);
-			this.view.resetGUI();
+			int saveVal = JOptionPane.showConfirmDialog(this.view, "Unsaved changes will be lost are you sure?");
 			
+			if(saveVal == JOptionPane.OK_OPTION) {
+				this.model.setMap(new Map());
+				this.model.setCurrentObj(null);
+				this.model.setZoom(100);
+				this.view.resetGUI();
+			}
+				
 			break;
 		case LOAD:
 			int loadVal = this.jfc.showOpenDialog(this);
