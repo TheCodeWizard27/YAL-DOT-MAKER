@@ -1,5 +1,6 @@
 package titlescreen;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -50,6 +51,7 @@ public class TitleButton extends JButton implements ActionListener{
 		this.model = model;
 		this.type = type;
 		this.list = list;
+		this.setMaximumSize(new Dimension(200,40));
 		this.addActionListener(this);
 		this.setFocusable(false);
 	}

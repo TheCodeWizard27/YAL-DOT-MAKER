@@ -1,8 +1,12 @@
 package mode;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.File;
 
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,7 +25,7 @@ import titlescreen.TitleButton;
 public class TitleScreen {
 	private JPanel container;
 	private JLabel title;
-	private JPanel btnContainer;
+	private Box btnContainer;
 	private TitleButton startBtn;
 	private TitleButton exitBtn;
 	private JList mapList;
@@ -34,7 +38,10 @@ public class TitleScreen {
 	 */
 	public TitleScreen(Model model) {
 		this.title = new JLabel("YAL DOT PLAYER");
-		this.btnContainer = new JPanel();
+		this.title.setFont(new Font("", Font.BOLD, 40));
+		this.title.setForeground(Color.WHITE);
+		
+		this.btnContainer = Box.createVerticalBox();
 		this.container = new JPanel();
 		this.mapList = new JList();
 		this.list = new DefaultListModel();
@@ -60,7 +67,6 @@ public class TitleScreen {
 		this.exitBtn.setText("exit");
 		
 		this.container.setLayout(new BorderLayout());
-		this.btnContainer.setLayout(new BorderLayout());
 		
 		this.btnContainer.add(startBtn, BorderLayout.NORTH);
 		this.btnContainer.add(exitBtn, BorderLayout.SOUTH);
@@ -69,6 +75,8 @@ public class TitleScreen {
 		this.container.add(title,BorderLayout.NORTH);
 		this.container.add(this.btnContainer, BorderLayout.WEST);
 		this.container.setFocusable(false);
+		this.container.setBackground(new Color(55,55,55));
+		this.container.setPreferredSize(new Dimension(800,600));
 	}
 	
 	/*
